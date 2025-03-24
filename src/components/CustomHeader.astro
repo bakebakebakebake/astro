@@ -1,37 +1,41 @@
 ---
 import type { Props } from '@astrojs/starlight/props';
-import Default from '@astrojs/starlight/components/Header.astro';
+import DefaultHeader from '@astrojs/starlight/components/Header.astro';
 ---
 
 <div class="custom-header-wrapper">
-  <Default {...Astro.props} />
-  <a href="https://fxj.wiki" class="digital-garden-link" target="_blank" rel="noopener noreferrer">
-    <img src="/digital-garden-icon.png" alt="Digital Garden" />
-    <span>Digital Garden</span>
-  </a>
+  <DefaultHeader {...Astro.props} />
+  <div class="custom-social-icons">
+    <a href="https://fxj.wiki" class="digital-garden-link" target="_blank" rel="noopener noreferrer">
+      <img src="/digital-garden-icon.png" alt="Digital Garden" />
+      <!-- 移除文字，只保留图标 -->
+    </a>
+  </div>
 </div>
 
 <style>
   .custom-header-wrapper {
+    position: relative;
+  }
+  
+  .custom-social-icons {
+    position: absolute;
+    right: 5.5rem; /* 调整位置，更靠近 GitHub 图标 */
+    top: 50%;
+    transform: translateY(-50%);
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    position: relative;
+    z-index: 10;
   }
   
   .digital-garden-link {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
     padding: 0.5rem;
     color: var(--sl-color-text);
     text-decoration: none;
     border-radius: 0.25rem;
     transition: background-color 0.2s;
-    position: absolute;
-    right: 5rem;
-    top: 50%;
-    transform: translateY(-50%);
   }
 
   .digital-garden-link:hover {
@@ -43,7 +47,10 @@ import Default from '@astrojs/starlight/components/Header.astro';
     height: 1.5rem;
   }
 
-  .digital-garden-link span {
-    font-size: 0.9rem;
+  /* 在移动设备上调整位置 */
+  @media (max-width: 768px) {
+    .custom-social-icons {
+      right: 4.5rem;
+    }
   }
 </style>

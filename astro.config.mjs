@@ -68,10 +68,19 @@ export default defineConfig({
         './src/styles/katex.css',
         './src/styles/custom.css',
       ],
-      plugins: [starlightThemeRapide()],
-      // 移除自定义主题切换组件，使用 starlight-theme-rapide 提供的
+      // 使用主题插件，但不使用它的主题切换组件
+      plugins: [
+        starlightThemeRapide({
+          // 禁用主题插件的主题切换组件
+          disableThemeSelect: true,
+        }),
+      ],
+      // 恢复自定义主题切换组件
       components: {
-        // 移除 ThemeSelect 配置，避免与 starlight-theme-rapide 冲突
+        // 使用自定义的主题切换组件
+        ThemeSelect: './src/components/ThemeSelect.astro',
+        // 添加自定义页眉组件，用于显示 Digital Garden 图标
+        Header: './src/components/CustomHeader.astro',
       },
     }),
   ].filter(Boolean), // 过滤掉 null 值
