@@ -1,0 +1,155 @@
+---
+// 使用硬编码的文本，不需要任何外部导入
+const lightLabel = '浅色';
+const darkLabel = '深色';
+const autoLabel = '自动';
+---
+
+<div class="theme-select">
+  <button id="theme-toggle" aria-label="切换主题">
+    <span>自动</span>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dropdown-icon">
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
+  </button>
+  <div class="theme-select-dropdown">
+    <button data-theme-value="light">{lightLabel}</button>
+    <button data-theme-value="dark">{darkLabel}</button>
+    <button data-theme-value="auto" data-default-theme>{autoLabel}</button>
+  </div>
+</div>
+
+<script>
+  // 主题切换逻辑
+  const themeToggle = document.getElementById('theme-toggle');
+  const toggleText = themeToggle?.querySelector('span');
+  const dropdown = document.querySelector('.theme-select-dropdown');
+  const buttons = document.querySelectorAll('.theme-select-dropdown button');
+  
+  // 初始化主题
+  const getTheme = () => {
+    if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+      return localStorage.getItem('theme');
+    }
+    return 'auto';
+  };
+  
+  const setTheme = (theme: 'light' | 'dark' | 'auto') => {
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem('theme', theme);
+    
+    // 更新按钮文本
+    if (toggleText) {
+      if (theme === 'light') toggleText.textContent = '浅色';
+      else if (theme === 'dark') toggleText.textContent = '深色';
+      else toggleText.textContent = '自动';
+    }
+  };
+  
+  // 设置初始主题
+  // 确保返回值为有效的主题类型
+  const theme = getTheme();
+  if (theme === 'light' || theme === 'dark' || theme === 'auto') {
+    setTheme(theme);
+  } else {
+    setTheme('auto');
+  }
+  
+  // 切换下拉菜单
+  themeToggle?.addEventListener('click', () => {
+    dropdown?.classList.toggle('show');
+  });
+  
+  // 点击外部关闭下拉菜单
+  document.addEventListener('click', (e) => {
+    if (!themeToggle?.contains(e.target as Node) && !dropdown?.contains(e.target as Node)) {
+      dropdown?.classList.remove('show');
+    }
+  });
+  
+  // 主题切换
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const theme = (button as HTMLElement).dataset.themeValue;
+      if (theme === 'light' || theme === 'dark' || theme === 'auto') {
+        setTheme(theme as 'light' | 'dark' | 'auto');
+      }
+      dropdown?.classList.remove('show');
+    });
+  });
+</script>
+
+<style>
+  .theme-select {
+    position: relative;
+    display: inline-block;
+  }
+  
+  #theme-toggle {
+    background: transparent;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.25rem;
+    padding: 0.5rem 0.75rem;
+    color: var(--sl-color-text);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    cursor: pointer;
+    min-width: 5rem;
+    font-size: 0.875rem;
+  }
+  
+  #theme-toggle:hover {
+    background-color: var(--sl-color-gray-5, rgba(128, 128, 128, 0.1));
+  }
+  
+  .dropdown-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+  
+  .theme-select-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 0.25rem;
+    background: var(--sl-color-bg);
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.25rem;
+    padding: 0.25rem 0;
+    min-width: 100%;
+    display: none;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .theme-select-dropdown.show {
+    display: block;
+  }
+  
+  .theme-select-dropdown button {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+    background: transparent;
+    border: none;
+    font-size: 0.875rem;
+    color: var(--sl-color-text);
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .theme-select-dropdown button:hover {
+    background-color: var(--sl-color-gray-5, rgba(128, 128, 128, 0.1));
+  }
+  
+  /* 当前选中的主题样式 */
+  .theme-select-dropdown button[data-theme-value="light"]:root[data-theme="light"],
+  .theme-select-dropdown button[data-theme-value="dark"]:root[data-theme="dark"],
+  .theme-select-dropdown button[data-theme-value="auto"]:root[data-theme="auto"] {
+    font-weight: bold;
+    background-color: var(--sl-color-gray-6, rgba(128, 128, 128, 0.2));
+  }
+</style>
