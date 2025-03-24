@@ -55,3 +55,53 @@
   background-color: var(--sl-color-gray-6);
   border-color: var(--sl-color-gray-5);
 }
+
+
+/* 代码块紧凑样式 - 简化版本 */
+.expressive-code {
+  --ec-line-height: 1.2 !important;
+  --ec-code-padding-block: 0.5rem !important;
+}
+
+.expressive-code pre {
+  line-height: 1.2 !important;
+  margin: 0 !important;
+}
+
+.expressive-code .ec-line {
+  min-height: 1.2em !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* 行号样式 */
+.expressive-code .ec-line-number {
+  height: 1.2em !important;
+  line-height: 1.2 !important;
+}
+
+
+/* 代码块紧凑样式 - 强制覆盖 */
+:root {
+  --ec-line-height: 1.1 !important;
+}
+
+.expressive-code pre {
+  line-height: 1.1 !important;
+}
+
+.expressive-code .ec-line {
+  min-height: 1.1em !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.expressive-code code {
+  font-size: 0.9rem !important;
+}
+
+/* 确保行号与代码对齐 */
+.expressive-code .ec-line-number {
+  height: 1.1em !important;
+  line-height: 1.1 !important;
+}

@@ -3,14 +3,8 @@ import starlight from '@astrojs/starlight';
 import starlightThemeRapide from 'starlight-theme-rapide';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
-import { fileURLToPath } from 'url';
-import path from 'path';
 import mdx from '@astrojs/mdx';
-// 导入 astroExpressiveCode（如果存在）
 import astroExpressiveCode from 'astro-expressive-code';
-
-// 获取项目根目录的绝对路径
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   // Markdown 配置
@@ -18,39 +12,18 @@ export default defineConfig({
     remarkPlugins: [remarkMath],
     rehypePlugins: [rehypeKatex],
   },
-  // 添加 Vite 配置
-  vite: {
-    server: {
-      fs: {
-        // 允许 Vite 访问更广泛的文件路径
-        allow: [
-          // 允许访问整个项目目录
-          __dirname,
-          // 允许访问上级目录的 node_modules
-          path.resolve(__dirname, '../node_modules'),
-          // 允许访问当前目录的 node_modules
-          path.resolve(__dirname, 'node_modules'),
-        ],
-      },
-    },
-    // 确保 KaTeX 字体被正确复制到构建目录
-    build: {
-      rollupOptions: {
-        output: {
-          assetFileNames: (assetInfo) => {
-            if (assetInfo.name.match(/\.(woff|woff2|ttf|otf)$/)) {
-              return 'assets/fonts/[name][extname]';
-            }
-            return 'assets/[name]-[hash][extname]';
-          },
-        },
-      },
-    },
-  },
-  // 修正集成顺序，确保 astroExpressiveCode 在 mdx 之前
+  // 集成配置
   integrations: [
-    // 如果存在 astroExpressiveCode，先添加它
-    astroExpressiveCode ? astroExpressiveCode() : null,
+    // 配置代码高亮
+    astroExpressiveCode({
+      themes: ['github-dark', 'github-light'],
+      styleOverrides: {
+        lineHeight: '1.1',
+        codePaddingBlock: '0.3rem',
+        codeFontSize: '0.9rem',
+      },
+      showLineNumbers: true,
+    }),
     mdx(),
     starlight({
       title: 'My docs',
@@ -68,20 +41,17 @@ export default defineConfig({
         './src/styles/katex.css',
         './src/styles/custom.css',
       ],
-      // 使用主题插件，但不使用它的主题切换组件
+      // 使用主题插件
       plugins: [
         starlightThemeRapide({
-          // 禁用主题插件的主题切换组件
           disableThemeSelect: true,
         }),
       ],
-      // 恢复自定义主题切换组件
+      // 组件配置
       components: {
-        // 使用自定义的主题切换组件
         ThemeSelect: './src/components/ThemeSelect.astro',
-        // 添加自定义页眉组件，用于显示 Digital Garden 图标
         Header: './src/components/CustomHeader.astro',
       },
     }),
-  ].filter(Boolean), // 过滤掉 null 值
+  ],
 });
