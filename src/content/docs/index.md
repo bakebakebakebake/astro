@@ -5,7 +5,7 @@ description: 通过 Starlight 构建的文档网站，了解有关我的项目�
 hero:
   tagline: 欢迎来到我的个人知识库！
   image:
-    file: ../../assets/my.jpg
+    file: ../../assets/shi_di_zai.png
   actions:
     - text: 开始探索
       link: /guides/getting-started/
@@ -16,24 +16,27 @@ hero:
       icon: github
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+<!-- {/* 使用内联方式引入组件 */} -->
+<!-- {/* <Card> 和 <CardGrid> 组件 */} -->
 
-## 探索内容 ✨
-
-<CardGrid>
-  <Card title="文档指南" icon="document">
-    查看我的详细文档，了解项目的各个方面。
-  </Card>
-  <Card title="组件示例" icon="puzzle">
-    浏览各种组件示例和使用方法。
-  </Card>
-  <Card title="博客文章" icon="pencil">
-    阅读我的最新博客文章和技术分享。
-  </Card>
-  <Card title="资源下载" icon="download">
-    获取相关资源和工具。
-  </Card>
-</CardGrid>
+<div class="card-grid">
+  <div class="card">
+    <h3>📄 文档指南</h3>
+    <p>查看我的详细文档，了解项目的各个方面。</p>
+  </div>
+  <div class="card">
+    <h3>🧩 组件示例</h3>
+    <p>浏览各种组件示例和使用方法。</p>
+  </div>
+  <div class="card">
+    <h3>✏️ 博客文章</h3>
+    <p>阅读我的最新博客文章和技术分享。</p>
+  </div>
+  <div class="card">
+    <h3>⬇️ 资源下载</h3>
+    <p>获取相关资源和工具。</p>
+  </div>
+</div>
 
 ## 最新更新
 
@@ -50,58 +53,3 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 :::
 
 欢迎来到我的项目！
-
-# Head1
-
-descriptions
-descriptions
-descriptions
-descriptions
-descriptions
-
-## Head2
-
-### Head3
-
-descriptions
-descriptions
-descriptions
-
-#### Head4
-
-descriptions
-descriptions
-descriptions
-descriptions
-
-##### Head5
-
-:::note
-
-Donec sollicitudin dolor et sollicitudin efficitur. Nullam semper posuere lacinia.
-
-:::note
-descriptions
-
-```cpp
-std::cout<<"hello,world!"<<std::endl;
-```
-
-:::
-
-:::note
-Test
-
-
-:::
-
-> [!NOTE] Title
-> descriptions
-
-<details>
-<summary>Nullam nec posuere lorem.</summary>
-
-Aenean tempor, orci eget ullamcorper luctus, nisl turpis pharetra mauris, sit amet tristique elit orci et sem. Aenean odio purus, suscipit quis accumsan in, blandit at ex.
-
-</details>
-

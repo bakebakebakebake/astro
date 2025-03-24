@@ -5,6 +5,9 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import { fileURLToPath } from 'url';
 import path from 'path';
+import mdx from '@astrojs/mdx';
+// 导入 astroExpressiveCode（如果存在）
+import astroExpressiveCode from 'astro-expressive-code';
 
 // 获取项目根目录的绝对路径
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -44,7 +47,11 @@ export default defineConfig({
       },
     },
   },
+  // 修正集成顺序，确保 astroExpressiveCode 在 mdx 之前
   integrations: [
+    // 如果存在 astroExpressiveCode，先添加它
+    astroExpressiveCode ? astroExpressiveCode() : null,
+    mdx(),
     starlight({
       title: 'My docs',
       // 添加社交链接
@@ -59,12 +66,13 @@ export default defineConfig({
       // 添加自定义 CSS
       customCss: [
         './src/styles/katex.css',
+        './src/styles/custom.css',
       ],
       plugins: [starlightThemeRapide()],
-      // 主题切换组件
+      // 移除自定义主题切换组件，使用 starlight-theme-rapide 提供的
       components: {
-        ThemeSelect: './src/components/ThemeSelect.astro',
+        // 移除 ThemeSelect 配置，避免与 starlight-theme-rapide 冲突
       },
     }),
-  ],
+  ].filter(Boolean), // 过滤掉 null 值
 });
