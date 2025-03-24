@@ -26,6 +26,11 @@ const autoLabel = '自动';
   const dropdown = document.querySelector('.theme-select-dropdown');
   const buttons = document.querySelectorAll('.theme-select-dropdown button');
   
+  // 检测系统偏好
+  const getSystemPreference = () => {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  };
+  
   // 初始化主题
   const getTheme = () => {
     if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
@@ -35,7 +40,12 @@ const autoLabel = '自动';
   };
   
   const setTheme = (theme: 'light' | 'dark' | 'auto') => {
-    document.documentElement.dataset.theme = theme;
+    // 如果是自动模式，根据系统偏好设置实际主题
+    const actualTheme = theme === 'auto' ? getSystemPreference() : theme;
+    
+    // 设置文档主题
+    document.documentElement.dataset.theme = actualTheme;
+    // 保存用户选择
     localStorage.setItem('theme', theme);
     
     // 更新按钮文本
@@ -47,13 +57,21 @@ const autoLabel = '自动';
   };
   
   // 设置初始主题
-  // 确保返回值为有效的主题类型
   const theme = getTheme();
   if (theme === 'light' || theme === 'dark' || theme === 'auto') {
     setTheme(theme);
   } else {
     setTheme('auto');
   }
+  
+  // 监听系统主题变化
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    const currentTheme = getTheme();
+    if (currentTheme === 'auto') {
+      // 只有在自动模式下才响应系统变化
+      setTheme('auto');
+    }
+  });
   
   // 切换下拉菜单
   themeToggle?.addEventListener('click', () => {
