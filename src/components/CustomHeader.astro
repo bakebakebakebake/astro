@@ -3,26 +3,20 @@ import type { Props } from '@astrojs/starlight/props';
 import DefaultHeader from '@astrojs/starlight/components/Header.astro';
 ---
 
-<div class="header-wrapper">
-  <DefaultHeader {...Astro.props} />
-  <div class="digital-garden-container">
+<DefaultHeader {...Astro.props}>
+  <div class="digital-garden-container" slot="actions">
     <a href="https://fxj.wiki" class="digital-garden-link" target="_blank" rel="noopener noreferrer">
       <img src="/digital-garden-icon.png" alt="Digital Garden" />
     </a>
   </div>
-</div>
+</DefaultHeader>
 
 <style>
-  .header-wrapper {
-    position: relative;
-  }
-  
   .digital-garden-container {
-    position: absolute;
-    right: 5.5rem; /* 调整位置，确保在 GitHub 图标左侧 */
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
+    display: flex;
+    align-items: center;
+    margin-right: 0.5rem;
+    order: -1; /* 确保它显示在其他社交图标之前 */
   }
   
   .digital-garden-link {
@@ -42,10 +36,14 @@ import DefaultHeader from '@astrojs/starlight/components/Header.astro';
     height: 1.5rem;
   }
   
-  /* 在移动设备上调整位置 */
-  @media (max-width: 768px) {
-    .digital-garden-container {
-      right: 4.5rem;
-    }
+  /* 确保在 Starlight 的社交链接容器中正确显示 */
+  :global(.social-links) {
+    display: flex !important;
+    align-items: center !important;
+  }
+  
+  :global(.social-links a) {
+    display: flex !important;
+    align-items: center !important;
   }
 </style>
