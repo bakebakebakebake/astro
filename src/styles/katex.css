@@ -1,0 +1,7 @@
+/* 导入 KaTeX CSS */
+@import 'katex/dist/katex.min.css';
+
+/* 添加一些自定义样式以确保字体路径正确 */
+:root {
+  --katex-font-path: '/node_modules/katex/dist/fonts/';
+}

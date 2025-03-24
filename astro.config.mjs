@@ -1,8 +1,49 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightThemeRapide from 'starlight-theme-rapide';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
+import { fileURLToPath } from 'url';
+import path from 'path';
+
+// 获取项目根目录的绝对路径
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
+  // Markdown 配置
+  markdown: {
+    remarkPlugins: [remarkMath],
+    rehypePlugins: [rehypeKatex],
+  },
+  // 添加 Vite 配置
+  vite: {
+    server: {
+      fs: {
+        // 允许 Vite 访问更广泛的文件路径
+        allow: [
+          // 允许访问整个项目目录
+          __dirname,
+          // 允许访问上级目录的 node_modules
+          path.resolve(__dirname, '../node_modules'),
+          // 允许访问当前目录的 node_modules
+          path.resolve(__dirname, 'node_modules'),
+        ],
+      },
+    },
+    // 确保 KaTeX 字体被正确复制到构建目录
+    build: {
+      rollupOptions: {
+        output: {
+          assetFileNames: (assetInfo) => {
+            if (assetInfo.name.match(/\.(woff|woff2|ttf|otf)$/)) {
+              return 'assets/fonts/[name][extname]';
+            }
+            return 'assets/[name]-[hash][extname]';
+          },
+        },
+      },
+    },
+  },
   integrations: [
     starlight({
       title: 'My docs',
@@ -10,18 +51,17 @@ export default defineConfig({
       social: {
         github: 'https://github.com/bakebakebakebake/astro',
       },
-      // 移除 i18n 相关配置
-      // defaultLocale: 'zh-cn',
-      // locales: {
-      //   'en': {
-      //     label: 'English',
-      //   },
-      //   'zh-cn': {
-      //     label: '简体中文',
-      //   },
-      // },
+      // 配置目录显示级别
+      tableOfContents: { 
+        minHeadingLevel: 2, 
+        maxHeadingLevel: 6 
+      },
+      // 添加自定义 CSS
+      customCss: [
+        './src/styles/katex.css',
+      ],
       plugins: [starlightThemeRapide()],
-      // 保留主题切换组件
+      // 主题切换组件
       components: {
         ThemeSelect: './src/components/ThemeSelect.astro',
       },
