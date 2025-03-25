@@ -150,6 +150,16 @@
               "icon": "lucide-list",
               "title": "Dirichlet-convolution 的大纲"
             }
+          },
+          {
+            "id": "4b6536d88b2d4faf",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
+            }
           }
         ],
         "currentTab": 3
@@ -165,9 +175,10 @@
       "canvas:新建白板": false,
       "daily-notes:打开/创建今天的日记": false,
       "templates:插入模板": false,
-      "command-palette:打开命令面板": false
+      "command-palette:打开命令面板": false,
+      "obsidian-git:Open Git source control": false
     }
   },
-  "active": "a2a31866520547b5",
+  "active": "b07f54637b68f603",
   "lastOpenFiles": []
 }
