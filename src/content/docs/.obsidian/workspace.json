@@ -1,0 +1,173 @@
+{
+  "main": {
+    "id": "26b8dc74bfd6ec82",
+    "type": "split",
+    "children": [
+      {
+        "id": "79cce5a3a01bda25",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "9493d6014599aa35",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "guides/Dirichlet-convolution.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Dirichlet-convolution"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "a347964e6790a425",
+    "type": "split",
+    "children": [
+      {
+        "id": "f538bcb1a17f94fd",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a2a31866520547b5",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": true
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "b4b82cb25d918197",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "6278056f628dd94c",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "691a6a8b37220106",
+    "type": "split",
+    "children": [
+      {
+        "id": "740ad57bd800b7b9",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f79ee68a36cf6ca2",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "guides/Dirichlet-convolution.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Dirichlet-convolution 的反向链接列表"
+            }
+          },
+          {
+            "id": "d40155556785494e",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "guides/Dirichlet-convolution.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Dirichlet-convolution 的出链列表"
+            }
+          },
+          {
+            "id": "5f4eafb7837bb526",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "b07f54637b68f603",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "guides/Dirichlet-convolution.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Dirichlet-convolution 的大纲"
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false
+    }
+  },
+  "active": "a2a31866520547b5",
+  "lastOpenFiles": []
+}
