@@ -27,7 +27,7 @@ export default defineConfig({
     mdx(),
     starlight({
       title: 'My docs',
-      // 添加社交链接
+      // 只保留支持的社交链接
       social: {
         github: 'https://github.com/bakebakebakebake/astro',
       },
