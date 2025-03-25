@@ -143,7 +143,7 @@
               "type": "outline",
               "state": {
                 "file": "guides/Dirichlet-convolution.md",
-                "followCursor": false,
+                "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
@@ -179,7 +179,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "a2a31866520547b5",
+  "active": "b07f54637b68f603",
   "lastOpenFiles": [
     "attachment"
   ]
