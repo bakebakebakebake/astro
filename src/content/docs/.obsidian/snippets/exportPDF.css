@@ -1,0 +1,14 @@
+@media print {
+  body {
+    --font-interface-override: "系统字体" !important;
+    --font-text-override: "系统字体" !important;
+    --font-print-override: "系统字体" !important;
+    --font-monospace-override: "JetBrains Mono" !important;
+    --font-text-size: 13px !important;
+    /* --text-indent: 4ch; */
+    /* font-family: "思源宋体" !important; */
+  }
+}
+pre {
+    tab-size: 4; /* 控制Tab键的宽度，即缩进的格数 */
+}

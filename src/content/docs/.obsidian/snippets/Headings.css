@@ -1,0 +1,50 @@
+.cm-header.cm-header-2{
+    color: rgb(93, 148, 215);
+}
+.cm-header.cm-header-3{
+    color: rgb(80, 43, 201);
+} 
+  
+/* Headings colors */
+:root {
+    /* --h1-color-light: ; */
+    --h2-color-light: rgb(93, 148, 215);
+    --h3-color-light: rgb(80, 43, 201);
+    
+    /* --h4-color-light: ; */
+    /* --h5-color-light: ; */
+    /* --h6-color-light: ; */
+/* 
+    --h1-color-dark: ;
+    --h2-color-dark: ;
+    --h3-color-dark: ;
+    --h4-color-dark: ;
+    --h5-color-dark: ;
+    --h6-color-dark: ;
+*/
+}
+h2 {
+    color: #d4fcc3;
+}
+/* Apply the colors to the headings */
+
+h2 {
+    color: var(--h2-color-light)!important; /* Light theme */
+    /* Add !important if there are specificity issues */
+}
+
+h3 {
+    color: var(--h3-color-light)!important; /* Light theme */
+    /* Add !important if there are specificity issues */
+}
+
+/* For dark theme, you can use the following classes or pseudo-classes to apply the dark theme colors */
+/* .theme-dark h1,
+.theme-dark h2,
+.theme-dark h3,
+.theme-dark h4,
+.theme-dark h5,
+.theme-dark h6 {
+    color: var(--h1-color-dark); */
+    /* Add !important if there are specificity issues */
+/* } */
