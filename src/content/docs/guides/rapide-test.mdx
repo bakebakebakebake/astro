@@ -1,0 +1,349 @@
+---
+title: Rapide主题功能测试
+description: 测试Starlight Rapide主题的各种功能和组件
+---
+
+import { Badge } from '@astrojs/starlight/components';
+import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+import { FileTree } from '@astrojs/starlight/components';
+import { LinkButton } from '@astrojs/starlight/components';
+
+<style is:global>
+{`
+  /* 透明卡片样式 */
+  .card, .card:hover {
+    background-color: transparent !important;
+    border: 1px solid var(--sl-color-gray-5) !important;
+    transition: all 0.2s ease !important;
+  }
+  
+  .card:hover {
+    border-color: var(--sl-color-accent) !important;
+    transform: translateY(-2px) !important;
+  }
+  
+  .card-clickable {
+    cursor: pointer !important;
+  }
+  
+  /* 代码块样式 */
+  pre, 
+  .astro-code,
+  .astro-code pre {
+    background-color: rgb(246, 247, 249) !important;
+  }
+`}
+</style>
+
+# Rapide主题功能测试
+
+本页面用于测试Starlight Rapide主题的各种功能和组件是否正常工作。
+
+<LinkButton href="https://starlight-theme-rapide.vercel.app/" variant="primary">
+  访问Rapide官方网站
+</LinkButton>
+
+## 基本段落测试
+
+这是一个基本的段落，测试文本渲染是否正常。
+
+**这是加粗文本**
+
+*这是斜体文本*
+
+> 这是引用文本
+
+## 列表测试
+
+无序列表:
+
+- 项目1
+- 项目2
+- 项目3
+
+有序列表:
+
+1. 第一步
+2. 第二步
+3. 第三步
+
+## 徽章测试 <Badge text="新功能" />
+
+这里测试不同样式的徽章：
+
+<Badge text="默认徽章" /> <Badge text="提示徽章" variant="note" /> <Badge text="危险徽章" variant="danger" /> <Badge text="成功徽章" variant="success" /> <Badge text="警告徽章" variant="caution" />
+
+## 旁白组件测试
+
+以下是不同类型的旁白组件测试：
+
+:::note
+这是一个普通的提示信息。
+
+可以包含多个段落和**富文本**标记。
+:::
+
+:::tip
+这是一个提示信息，提供有用的技巧。
+:::
+
+:::caution
+这是一个警告信息，提醒用户注意特定事项。
+:::
+
+:::danger
+这是一个危险提示，警告用户可能的严重后果。
+:::
+
+## 卡片组件测试
+
+### 单个卡片
+
+<Card title="单独的卡片示例">
+  这是一个独立的卡片组件，用于展示特定的信息。
+</Card>
+
+### 卡片网格
+
+<CardGrid>
+  <Card title="快速上手" icon="rocket">
+    轻松开始使用Starlight构建文档网站。
+  </Card>
+  <Card title="完全可定制" icon="setting">
+    使用丰富的配置选项自定义网站外观。
+  </Card>
+  <Card title="Markdown增强" icon="document">
+    使用MDX和各种组件增强内容表现力。
+  </Card>
+  <Card title="SEO友好" icon="seti:html">
+    自动生成元数据，提高搜索引擎排名。
+  </Card>
+</CardGrid>
+
+### 可点击卡片
+
+<a href="/" style={{ textDecoration: 'none', display: 'block' }}>
+  <Card title="点击跳转到主页" icon="home" className="card-clickable">
+    点击这张卡片将跳转到网站主页。鼠标悬停时会有轻微的上浮效果，并且边框会变为主题强调色。
+  </Card>
+</a>
+
+## 选项卡组件测试
+
+<Tabs>
+  <TabItem label="概述">
+    Starlight是Astro的官方文档主题，它提供了一系列内置功能来构建美观、高性能的文档网站。
+  </TabItem>
+  <TabItem label="特性">
+    - 内置搜索功能
+    - 国际化支持
+    - 暗色模式/亮色模式切换
+    - 移动端响应式设计
+    - SEO优化
+    - 内容集合支持
+  </TabItem>
+  <TabItem label="配置">
+    ```javascript
+    starlight({
+      title: '我的文档',
+      social: [
+        { label: 'GitHub', icon: 'github', href: 'https://github.com/withastro/starlight' },
+      ],
+    })
+    ```
+  </TabItem>
+</Tabs>
+
+## 带代码块的选项卡
+
+<Tabs>
+  <TabItem label="HTML">
+    ```html
+    <!DOCTYPE html>
+    <html lang="zh">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>HTML示例</title>
+      <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+      <h1>Hello, World!</h1>
+      <p>这是一个HTML示例。</p>
+    </body>
+    </html>
+    ```
+  </TabItem>
+  <TabItem label="CSS">
+    ```css
+    body {
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    h1 {
+      color: #0077cc;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 5px;
+    }
+    ```
+  </TabItem>
+  <TabItem label="JavaScript">
+    ```javascript
+    // 等待DOM加载完成
+    document.addEventListener('DOMContentLoaded', () => {
+      // 获取元素
+      const heading = document.querySelector('h1');
+      
+      // 添加点击事件
+      heading.addEventListener('click', () => {
+        alert('你点击了标题!');
+      });
+      
+      console.log('JavaScript已加载!');
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+## 步骤组件测试
+
+<Steps>
+  1. **安装依赖**
+     
+     使用你喜欢的包管理器安装依赖。
+     
+     ```bash
+     npm install @astrojs/starlight starlight-theme-rapide
+     ```
+  
+  2. **配置Astro**
+     
+     在`astro.config.mjs`文件中添加Starlight集成和Rapide主题。
+  
+  3. **创建内容**
+     
+     在`src/content/docs/`目录下创建Markdown或MDX文件。
+  
+  4. **启动开发服务器**
+     
+     ```bash
+     npm run dev
+     ```
+</Steps>
+
+## 文件树组件测试
+
+<FileTree>
+  - src/
+    - content/
+      - docs/
+        - guides/
+          - getting-started.md
+          - rapide-test.mdx
+        - index.md
+    - components/
+      - CustomHeader.astro
+      - ThemeSelect.astro
+    - styles/
+      - custom.css
+  - astro.config.mjs
+  - package.json
+</FileTree>
+
+## LaTeX公式测试
+
+Starlight支持通过插件显示数学公式：
+
+行内公式: $E=mc^2$
+
+行间公式:
+
+$$\frac{d}{dx}\left( \int_{a}^{x} f(u)\,du\right)=f(x)$$
+
+微分方程:
+
+$$\frac{dy}{dx} + P(x)y = Q(x)$$
+
+矩阵:
+
+$$\begin{pmatrix} a & b \\ c & d \end{pmatrix}$$
+
+## 代码块测试
+
+基本代码块:
+
+```javascript
+// 这是一个JavaScript代码示例
+function hello() {
+  console.log("Hello, Starlight!");
+}
+```
+
+## 表格测试
+
+| 名称 | 描述 |
+|------|------|
+| Astro | Web框架 |
+| Starlight | 文档主题 |
+| Rapide | 主题样式 |
+
+## 链接测试
+
+[Starlight文档](https://starlight.astro.build/)
+
+## 图片测试
+
+![占位图](https://via.placeholder.com/150)
+
+## 自定义CSS测试
+
+<div className="custom-container">
+  <p>这是一个使用自定义CSS样式的容器</p>
+  <button className="custom-button">点击按钮</button>
+</div>
+
+<style>
+{`
+  /* 网格布局 */
+  .grid-cols-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    .grid-cols-2 {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* 自定义容器 */
+  .custom-container {
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-left: 4px solid var(--sl-color-accent);
+  }
+
+  .custom-button {
+    background-color: var(--sl-color-accent);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .custom-button:hover {
+    background-color: var(--sl-color-accent-high);
+  }
+`}
+</style> 

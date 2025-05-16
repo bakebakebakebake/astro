@@ -29,6 +29,7 @@ export default defineConfig({
       title: 'My Docs',
       // 更新social配置格式，使用href而不是link
       social: [
+        { label: '主页', icon: 'open-book', href: 'https://fxj.wiki' },
         { label: 'GitHub', icon: 'github', href: 'https://github.com/bakebakebakebake/astro' },
       ],
       // 配置目录显示级别
@@ -44,12 +45,11 @@ export default defineConfig({
       // 使用主题插件
       plugins: [
         starlightThemeRapide({
-          disableThemeSelect: true,
+          disableThemeSelect: false,
         }),
       ],
       // 组件配置
       components: {
-        ThemeSelect: './src/components/ThemeSelect.astro',
         Header: './src/components/CustomHeader.astro',
       },
       // 配置侧边栏
@@ -59,6 +59,8 @@ export default defineConfig({
           items: [
             { label: '开始使用', link: '/guides/getting-started/' },
             { label: 'Dirichlet卷积', link: '/guides/dirichlet-convolution/' },
+            { label: 'Starlight功能测试', link: '/guides/starlight-test/' },
+            { label: 'Rapide主题测试', link: '/guides/rapide-test/' },
           ],
         },
       ],
