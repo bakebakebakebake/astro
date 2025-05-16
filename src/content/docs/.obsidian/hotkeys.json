@@ -6,5 +6,15 @@
       ],
       "key": "Q"
     }
-  ]
+  ],
+  "text-finder:text-finder-show-find-and-replace": [
+    {
+      "modifiers": [
+        "Alt",
+        "Mod"
+      ],
+      "key": "F"
+    }
+  ],
+  "easy-typing-obsidian:easy-typing-insert-codeblock": []
 }

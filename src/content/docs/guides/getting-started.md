@@ -30,3 +30,5 @@ pnpm create astro
 ```
 
 111
+
+![](https://uploadfiles.nowcoder.com/images/20250515/0_1747278046075/90F8539E676B0F793FB20634CD7D9C73)
