@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "79cce5a3a01bda25",
+        "id": "44ceef05a3c0c4cb",
         "type": "tabs",
         "children": [
           {
-            "id": "9493d6014599aa35",
+            "id": "67e2b5aa98af5173",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -179,7 +179,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "a2a31866520547b5",
+  "active": "67e2b5aa98af5173",
   "lastOpenFiles": [
     "guides/getting-started.md",
     "guides/Dirichlet-convolution.md",
