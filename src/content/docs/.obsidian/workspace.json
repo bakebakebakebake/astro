@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "guides/Dirichlet-convolution.md",
+                "file": "guides/getting-started.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Dirichlet-convolution"
+              "title": "getting-started"
             }
           }
         ]
@@ -142,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "guides/Dirichlet-convolution.md",
+                "file": "guides/getting-started.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Dirichlet-convolution 的大纲"
+              "title": "getting-started 的大纲"
             }
           },
           {
@@ -179,8 +179,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "b07f54637b68f603",
+  "active": "9493d6014599aa35",
   "lastOpenFiles": [
+    "guides/Dirichlet-convolution.md",
+    "index.md",
+    "guides/getting-started.md",
     "attachment"
   ]
 }
