@@ -1,37 +1,49 @@
 ---
-title: Getting Started
-description: 快速上手指南，帮助您开始使用我们的文档系统
+title: 开始使用
+description: 学习如何开始使用这个Starlight网站
 ---
 
-本指南将帮助您快速上手并开始使用我们的文档系统。
+# 开始使用
 
-## 安装
+欢迎来到这个Starlight文档网站！本指南将帮助您快速开始。
 
-### 前置条件
+## 前提条件
 
-在开始之前，请确保您的系统中已安装以下工具：
+- [Node.js](https://nodejs.org/) (v18.14.1 或更高版本)
+- 文本编辑器（推荐 [VS Code](https://code.visualstudio.com/)）
+- 终端
 
-- Node.js (v16.12.0 或更高版本)
-- npm 或 yarn 或 pnpm
+## 开发步骤
 
-### 创建新项目
-
-使用以下命令创建一个新的 Astro 项目：
-
+1. 安装依赖：
 ```bash
-# 使用 npm
-npm create astro@latest
-
-# 使用 yarn
-yarn create astro
-
-# 使用 pnpm
-pnpm create astro
+npm install
 ```
 
-111
+2. 启动开发服务器：
+```bash
+npm run dev
+```
 
-![](https://uploadfiles.nowcoder.com/images/20250515/0_1747278046075/90F8539E676B0F793FB20634CD7D9C73)
+3. 访问本地开发服务器：[http://localhost:4321](http://localhost:4321)
+
+## 项目结构
+
+```
+/
+├── public/          # 静态资源
+├── src/
+│   ├── assets/      # 图片和其他资源
+│   ├── components/  # Astro组件
+│   ├── content/     # 文档内容
+│   │   └── docs/    # 文档页面
+│   └── styles/      # CSS样式文件
+└── astro.config.mjs # Astro配置
+```
+
+## 后续步骤
+
+开始编写您的文档内容，添加更多页面，并自定义您的Starlight主题！
 
 
 

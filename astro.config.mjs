@@ -26,11 +26,11 @@ export default defineConfig({
     }),
     mdx(),
     starlight({
-      title: 'My docs',
-      // 只保留支持的社交链接
-      social: {
-        github: 'https://github.com/bakebakebakebake/astro',
-      },
+      title: 'My Docs',
+      // 更新social配置格式，使用href而不是link
+      social: [
+        { label: 'GitHub', icon: 'github', href: 'https://github.com/bakebakebakebake/astro' },
+      ],
       // 配置目录显示级别
       tableOfContents: { 
         minHeadingLevel: 2, 
@@ -52,6 +52,16 @@ export default defineConfig({
         ThemeSelect: './src/components/ThemeSelect.astro',
         Header: './src/components/CustomHeader.astro',
       },
+      // 配置侧边栏
+      sidebar: [
+        {
+          label: '指南',
+          items: [
+            { label: '开始使用', link: '/guides/getting-started/' },
+            { label: 'Dirichlet卷积', link: '/guides/dirichlet-convolution/' },
+          ],
+        },
+      ],
     }),
   ],
 });

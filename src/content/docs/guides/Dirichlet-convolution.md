@@ -1,5 +1,6 @@
 ---
-title: 狄利克雷卷积
+title: Dirichlet卷积
+description: Dirichlet卷积的数学理论与应用
 date: 2024-01-12T20:55
 author: FXJFXJ
 categories: ACM
