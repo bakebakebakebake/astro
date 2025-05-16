@@ -27,5 +27,7 @@
       "process_alias": "|addClass(ab-custom-text-blue)|addClass(ab-custom-bg-red)|"
     }
   ],
-  "is_debug": false
+  "is_debug": false,
+  "enhance_refresh_time": 2000,
+  "inline_split": "/\\| |,  |， |\\.  |。 |:  |： /"
 }
