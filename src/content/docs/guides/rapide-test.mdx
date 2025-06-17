@@ -18,16 +18,16 @@ import { LinkButton } from '@astrojs/starlight/components';
     border: 1px solid var(--sl-color-gray-5) !important;
     transition: all 0.2s ease !important;
   }
-  
+
   .card:hover {
     border-color: var(--sl-color-accent) !important;
     transform: translateY(-2px) !important;
   }
-  
+
   .card-clickable {
     cursor: pointer !important;
   }
-  
+
   /* 代码块样式 */
   pre, 
   .astro-code,
@@ -124,11 +124,12 @@ import { LinkButton } from '@astrojs/starlight/components';
 
 ### 可点击卡片
 
-<a href="/" style={{ textDecoration: 'none', display: 'block' }}>
-  <Card title="点击跳转到主页" icon="home" className="card-clickable">
+
+
+<Card as="a" href="/" style={{ textDecoration: 'none', display: 'block' }} title="点击跳转到主页" icon="home" className="card-clickable">
+  {/* <Card title="点击跳转到主页" icon="home" className="card-clickable"> */}
     点击这张卡片将跳转到网站主页。鼠标悬停时会有轻微的上浮效果，并且边框会变为主题强调色。
-  </Card>
-</a>
+</Card>
 
 ## 选项卡组件测试
 
