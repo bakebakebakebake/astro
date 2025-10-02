@@ -1,0 +1,1100 @@
+---
+title: Rapide 主题语法完整指南
+description: 详细介绍 Rapide 主题的所有语法，重点讲解代码块和标注的使用方法
+---
+
+import { Badge } from '@astrojs/starlight/components';
+import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Steps } from '@astrojs/starlight/components';
+import { FileTree } from '@astrojs/starlight/components';
+import { LinkButton } from '@astrojs/starlight/components';
+
+# Rapide 主题语法完整指南
+
+本文档详细介绍 Rapide 主题的所有语法特性，**重点关注代码块和标注（Asides）的处理**。
+
+:::tip[快速提示]
+Rapide 是 Starlight 的一个主题插件，它在 Starlight 的基础上提供了更现代、更优雅的视觉样式。所有 Starlight 的功能在 Rapide 中都可以使用。
+:::
+
+---
+
+## 📌 一、标注（Asides）详解
+
+标注（Asides）是用于突出显示特定信息的特殊块，在 Rapide 主题中样式优美，非常适合强调重要内容。
+
+### 1.1 基本语法
+
+标注使用三个冒号 `:::` 包裹，后面跟标注类型：
+
+```md
+:::note
+这是一个普通提示。
+:::
+```
+
+### 1.2 所有标注类型
+
+Rapide 支持以下 5 种标注类型：
+
+#### 📘 Note（笔记/提示）
+
+用于一般性的提示信息。
+
+**语法：**
+```md
+:::note
+这是一个普通的提示信息，用于补充说明。
+:::
+```
+
+**效果：**
+:::note
+这是一个普通的提示信息，用于补充说明。
+:::
+
+---
+
+#### 💡 Tip（技巧/建议）
+
+用于提供有用的技巧或最佳实践。
+
+**语法：**
+```md
+:::tip
+这是一个技巧提示，建议你这样做会更好！
+:::
+```
+
+**效果：**
+:::tip
+这是一个技巧提示，建议你这样做会更好！
+:::
+
+---
+
+#### ⚠️ Caution（警告/注意）
+
+用于提醒用户需要注意的事项。
+
+**语法：**
+```md
+:::caution
+这是一个警告信息，请特别注意这个操作！
+:::
+```
+
+**效果：**
+:::caution
+这是一个警告信息，请特别注意这个操作！
+:::
+
+---
+
+#### 🚨 Danger（危险）
+
+用于严重警告，表示可能导致严重后果的操作。
+
+**语法：**
+```md
+:::danger
+这是一个危险警告！此操作可能导致数据丢失或系统崩溃！
+:::
+```
+
+**效果：**
+:::danger
+这是一个危险警告！此操作可能导致数据丢失或系统崩溃！
+:::
+
+---
+
+### 1.3 自定义标注标题
+
+你可以为标注添加自定义标题，使用方括号 `[]` 语法：
+
+**语法：**
+```md
+:::note[💡 重要提示]
+使用自定义标题可以让标注更加醒目和个性化。
+:::
+```
+
+**效果：**
+:::note[💡 重要提示]
+使用自定义标题可以让标注更加醒目和个性化。
+:::
+
+**更多示例：**
+
+:::tip[🎯 最佳实践]
+在生产环境中，始终记得备份数据！
+:::
+
+:::caution[⚡ 性能警告]
+此操作可能需要较长时间，请耐心等待。
+:::
+
+:::danger[🔥 严重警告]
+执行此命令将永久删除所有数据，无法恢复！
+:::
+
+---
+
+### 1.4 标注中的富文本
+
+标注内部可以使用所有 Markdown 语法：
+
+:::note[📝 功能丰富的标注]
+标注内部支持：
+
+- **加粗文本**
+- *斜体文本*
+- `行内代码`
+- [链接](https://example.com)
+- 列表项
+
+甚至可以包含代码块：
+
+```javascript
+const message = "标注中的代码";
+console.log(message);
+```
+
+和公式：$E = mc^2$
+:::
+
+---
+
+## 💻 二、代码块详解
+
+Rapide 主题对代码块有出色的支持，提供语法高亮、行号、标题等功能。
+
+### 2.1 基本代码块
+
+使用三个反引号包裹代码，并指定语言：
+
+**语法：**
+````md
+```javascript
+function hello() {
+  console.log("Hello, Rapide!");
+}
+```
+````
+
+**效果：**
+```javascript
+function hello() {
+  console.log("Hello, Rapide!");
+}
+```
+
+---
+
+### 2.2 支持的编程语言
+
+Rapide 支持几乎所有主流编程语言的语法高亮：
+
+#### JavaScript / TypeScript
+
+```javascript
+// JavaScript 示例
+const greeting = (name) => {
+  return `Hello, ${name}!`;
+};
+
+console.log(greeting("World"));
+```
+
+```typescript
+// TypeScript 示例
+interface User {
+  name: string;
+  age: number;
+}
+
+const user: User = {
+  name: "Alice",
+  age: 30
+};
+```
+
+---
+
+#### Python
+
+```python
+# Python 示例
+def fibonacci(n):
+    if n <= 1:
+        return n
+    return fibonacci(n-1) + fibonacci(n-2)
+
+# 计算前10个斐波那契数
+for i in range(10):
+    print(f"F({i}) = {fibonacci(i)}")
+```
+
+---
+
+#### Java
+
+```java
+// Java 示例
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, Rapide!");
+        
+        // 创建数组
+        int[] numbers = {1, 2, 3, 4, 5};
+        for (int num : numbers) {
+            System.out.println(num);
+        }
+    }
+}
+```
+
+---
+
+#### C / C++
+
+```c
+// C 语言示例
+#include <stdio.h>
+
+int main() {
+    printf("Hello, Rapide!\n");
+    
+    // 简单循环
+    for (int i = 0; i < 5; i++) {
+        printf("%d ", i);
+    }
+    
+    return 0;
+}
+```
+
+```cpp
+// C++ 示例
+#include <iostream>
+#include <vector>
+
+int main() {
+    std::vector<int> numbers = {1, 2, 3, 4, 5};
+    
+    for (const auto& num : numbers) {
+        std::cout << num << " ";
+    }
+    
+    return 0;
+}
+```
+
+---
+
+#### Rust
+
+```rust
+// Rust 示例
+fn main() {
+    let numbers = vec![1, 2, 3, 4, 5];
+    
+    let sum: i32 = numbers.iter().sum();
+    println!("Sum: {}", sum);
+    
+    // 使用闭包
+    numbers.iter()
+        .map(|x| x * 2)
+        .for_each(|x| println!("{}", x));
+}
+```
+
+---
+
+#### Go
+
+```go
+// Go 语言示例
+package main
+
+import "fmt"
+
+func main() {
+    numbers := []int{1, 2, 3, 4, 5}
+    
+    sum := 0
+    for _, num := range numbers {
+        sum += num
+    }
+    
+    fmt.Printf("Sum: %d\n", sum)
+}
+```
+
+---
+
+#### HTML / CSS
+
+```html
+<!-- HTML 示例 -->
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Rapide 示例</title>
+</head>
+<body>
+    <h1>欢迎使用 Rapide 主题</h1>
+    <p>这是一个段落。</p>
+</body>
+</html>
+```
+
+```css
+/* CSS 样式示例 */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.button {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #2980b9;
+}
+```
+
+---
+
+#### Shell / Bash
+
+```bash
+#!/bin/bash
+# Bash 脚本示例
+
+echo "开始执行脚本..."
+
+# 变量定义
+NAME="Rapide"
+VERSION="1.0"
+
+echo "主题: $NAME"
+echo "版本: $VERSION"
+
+# 条件判断
+if [ -f "package.json" ]; then
+    echo "找到 package.json 文件"
+    npm install
+fi
+
+# 循环
+for i in {1..5}; do
+    echo "第 $i 次循环"
+done
+```
+
+---
+
+#### SQL
+
+```sql
+-- SQL 查询示例
+SELECT 
+    users.id,
+    users.name,
+    users.email,
+    COUNT(orders.id) as order_count
+FROM users
+LEFT JOIN orders ON users.id = orders.user_id
+WHERE users.created_at >= '2024-01-01'
+GROUP BY users.id, users.name, users.email
+HAVING COUNT(orders.id) > 5
+ORDER BY order_count DESC
+LIMIT 10;
+```
+
+---
+
+#### JSON / YAML
+
+```json
+{
+  "name": "rapide-theme",
+  "version": "0.4.0",
+  "description": "A beautiful theme for Starlight",
+  "keywords": ["astro", "starlight", "theme"],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "@astrojs/starlight": "^0.34.3",
+    "astro": "^5.7.13"
+  }
+}
+```
+
+```yaml
+# YAML 配置示例
+title: My Documentation
+theme: rapide
+
+features:
+  - code-highlighting
+  - dark-mode
+  - responsive-design
+
+social:
+  - label: GitHub
+    icon: github
+    href: https://github.com/username/repo
+  - label: Twitter
+    icon: twitter
+    href: https://twitter.com/username
+```
+
+---
+
+### 2.3 代码块的高级特性
+
+Rapide 主题的代码块支持强大的 Expressive Code 特性，包括**行号**、**文件名**、**高亮行**、**Diff 标记**等。
+
+#### ① 自动显示行号
+
+项目已配置自动显示行号，所有代码块都会显示：
+
+```javascript
+// 左侧会自动显示行号
+function calculateSum(a, b) {
+  return a + b;
+}
+
+const result = calculateSum(10, 20);
+console.log(`结果是: ${result}`);
+```
+
+---
+
+#### ② 代码块命名（Editor Frame）
+
+在代码块的第一行以注释形式添加文件名：
+
+**语法：**
+````md
+```javascript title="app.js"
+const greeting = "Hello, Rapide!";
+console.log(greeting);
+```
+````
+
+**效果：**
+```javascript title="app.js"
+const greeting = "Hello, Rapide!";
+console.log(greeting);
+```
+
+---
+
+#### ③ 高亮特定行
+
+使用 `{行号}` 语法高亮特定行：
+
+**语法：**
+````md
+```javascript {3,5-7}
+function example() {
+  const a = 1;
+  const b = 2;  // 这行会被高亮
+  const c = 3;
+  // 这三行
+  // 都会
+  // 被高亮
+  return a + b + c;
+}
+```
+````
+
+**效果：**
+```javascript {3,5-7}
+function example() {
+  const a = 1;
+  const b = 2;  // 这行会被高亮
+  const c = 3;
+  // 这三行
+  // 都会
+  // 被高亮
+  return a + b + c;
+}
+```
+
+---
+
+#### ④ Diff 标记（添加/删除）
+
+使用 `ins` 和 `del` 标记代码的增删：
+
+**语法：**
+````md
+```javascript ins={3} del={2}
+function greet(name) {
+  return "Hello " + name;  // 删除这行
+  return `Hello, ${name}!`;  // 添加这行
+}
+```
+````
+
+**效果：**
+```javascript ins={3} del={2}
+function greet(name) {
+  return "Hello " + name;  // 删除这行
+  return `Hello, ${name}!`;  // 添加这行
+}
+```
+
+更复杂的 Diff 示例：
+
+```javascript title="server.js" ins={4-6} del={2}
+const express = require('express');
+const port = 3000;  // 旧端口
+const app = express();
+
+// 新增：环境变量配置
+const port = process.env.PORT || 3000;
+const host = process.env.HOST || 'localhost';
+
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
+```
+
+---
+
+#### ⑤ Terminal Frame（终端样式）
+
+添加 Terminal 提示符样式：
+
+```bash title="安装依赖"
+npm install starlight-theme-rapide
+```
+
+```bash title="启动开发服务器"
+npm run dev
+```
+
+---
+
+#### ⑥ 复制、换行、下载功能
+
+代码块右上角自动提供三个功能按钮：
+
+- **📋 复制按钮** - 一键复制代码到剪贴板
+- **↔️ 换行切换** - 切换代码是否自动换行
+- **⬇️ 下载按钮** - 下载代码为文件（如果有文件名）
+
+这些功能已在配置中启用，无需额外设置！
+
+---
+
+#### ⑦ 综合示例
+
+结合多种特性：
+
+```typescript title="utils/auth.ts" {5,8-10} ins={8-10} del={5}
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: 'admin' | 'user';  // 旧的角色定义
+}
+
+// 新的角色系统
+type Role = 'admin' | 'user' | 'moderator';
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: Role;
+  permissions: string[];
+}
+
+export function checkPermission(user: User, permission: string): boolean {
+  return user.permissions.includes(permission);
+}
+```
+
+---
+
+#### 行内代码
+
+使用单个反引号创建行内代码：
+
+**语法：**
+```md
+使用 `const` 声明常量，使用 `let` 声明变量。
+```
+
+**效果：**
+使用 `const` 声明常量，使用 `let` 声明变量。
+
+---
+
+### 2.4 代码块 + 标注组合使用
+
+这是一个强大的组合，可以在标注中展示代码：
+
+:::tip[💡 快速开始]
+安装 Rapide 主题非常简单：
+
+```bash
+npm install starlight-theme-rapide
+```
+
+然后在 `astro.config.mjs` 中配置：
+
+```javascript
+import starlightThemeRapide from 'starlight-theme-rapide';
+
+export default defineConfig({
+  integrations: [
+    starlight({
+      plugins: [starlightThemeRapide()],
+      title: 'My Docs',
+    }),
+  ],
+});
+```
+:::
+
+---
+
+:::danger[🔥 常见错误]
+不要忘记在 frontmatter 后导入组件！
+
+**错误示例：**
+```md
+---
+title: My Page
+---
+
+# 标题
+import { Card } from '@astrojs/starlight/components';
+```
+
+**正确示例：**
+```md
+---
+title: My Page
+---
+
+import { Card } from '@astrojs/starlight/components';
+
+# 标题
+```
+:::
+
+---
+
+## 🎨 三、其他组件
+
+### 3.1 徽章（Badge）
+
+徽章用于标记状态、版本或重要信息。
+
+**基本用法：**
+```jsx
+<Badge text="新功能" />
+```
+
+**效果：**
+<Badge text="新功能" />
+
+**不同样式：**
+
+<Badge text="默认" /> 
+<Badge text="提示" variant="note" /> 
+<Badge text="成功" variant="success" /> 
+<Badge text="警告" variant="caution" /> 
+<Badge text="危险" variant="danger" />
+
+**在标题中使用：**
+```jsx
+## API 文档 <Badge text="v2.0" variant="success" />
+```
+
+效果：
+## API 文档 <Badge text="v2.0" variant="success" />
+
+---
+
+### 3.2 卡片（Card）
+
+#### 单个卡片
+
+```jsx
+import { Card } from '@astrojs/starlight/components';
+
+<Card title="卡片标题" icon="rocket">
+  这是卡片的内容。
+</Card>
+```
+
+**效果：**
+<Card title="功能介绍" icon="rocket">
+  Rapide 主题提供了出色的视觉体验和丰富的组件支持。
+</Card>
+
+#### 卡片网格
+
+```jsx
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid>
+  <Card title="快速" icon="approve-check">
+    闪电般的构建速度
+  </Card>
+  <Card title="美观" icon="star">
+    现代化的设计
+  </Card>
+  <Card title="强大" icon="rocket">
+    功能丰富
+  </Card>
+</CardGrid>
+```
+
+**效果：**
+<CardGrid>
+  <Card title="快速" icon="approve-check">
+    闪电般的构建速度，优化的性能表现
+  </Card>
+  <Card title="美观" icon="star">
+    现代化的设计，优雅的视觉体验
+  </Card>
+  <Card title="强大" icon="rocket">
+    功能丰富，组件齐全
+  </Card>
+  <Card title="易用" icon="setting">
+    简单配置，快速上手
+  </Card>
+</CardGrid>
+
+---
+
+### 3.3 选项卡（Tabs）
+
+选项卡适合展示多个选项或不同语言的代码示例。
+
+**语法示例：**
+
+导入组件并使用：
+
+```jsx
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Tabs>
+  <TabItem label="选项1">
+    内容1
+  </TabItem>
+  <TabItem label="选项2">
+    内容2
+  </TabItem>
+</Tabs>
+```
+
+**效果：**
+<Tabs>
+  <TabItem label="npm">
+  
+```bash
+npm install starlight-theme-rapide
+```
+
+  </TabItem>
+  <TabItem label="pnpm">
+  
+```bash
+pnpm add starlight-theme-rapide
+```
+
+  </TabItem>
+  <TabItem label="yarn">
+  
+```bash
+yarn add starlight-theme-rapide
+```
+
+  </TabItem>
+</Tabs>
+
+---
+
+### 3.4 步骤组件（Steps）
+
+用于展示操作流程或教程步骤。
+
+**语法示例：**
+
+```jsx
+import { Steps } from '@astrojs/starlight/components';
+
+<Steps>
+  1. 第一步说明
+  2. 第二步说明
+  3. 第三步说明
+</Steps>
+```
+
+**效果：**
+<Steps>
+
+1. **安装依赖**
+   
+   使用你喜欢的包管理器安装依赖
+
+   ```bash
+   npm install starlight-theme-rapide
+   ```
+
+2. **配置主题**
+   
+   在 `astro.config.mjs` 中添加 Rapide 主题配置
+
+3. **创建内容**
+   
+   在 `src/content/docs/` 目录下创建你的文档文件
+
+4. **启动开发服务器**
+   
+   运行开发服务器预览效果
+
+   ```bash
+   npm run dev
+   ```
+
+</Steps>
+
+---
+
+### 3.5 文件树（FileTree）
+
+用于展示项目结构。
+
+```jsx
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+  - src/
+    - content/
+      - docs/
+        - guides/
+          - getting-started.md
+          - syntax-guide.mdx
+        - index.mdx
+    - components/
+    - styles/
+  - astro.config.mjs
+  - package.json
+</FileTree>
+```
+
+**效果：**
+<FileTree>
+  - src/
+    - content/
+      - docs/
+        - guides/
+          - getting-started.md
+          - rapide-syntax-guide.mdx
+        - index.mdx
+    - components/
+      - CustomHeader.astro
+    - styles/
+      - custom.css
+      - katex.css
+  - astro.config.mjs
+  - package.json
+  - README.md
+</FileTree>
+
+---
+
+### 3.6 链接按钮（LinkButton）
+
+创建醒目的行动号召按钮。
+
+```jsx
+import { LinkButton } from '@astrojs/starlight/components';
+
+<LinkButton href="https://example.com" variant="primary">
+  开始使用
+</LinkButton>
+```
+
+**效果：**
+<LinkButton href="https://starlight-theme-rapide.vercel.app/" variant="primary">
+  访问 Rapide 官网
+</LinkButton>
+
+---
+
+## 📐 四、LaTeX 数学公式
+
+Rapide 主题完美支持 LaTeX 数学公式（需要配置 remark-math 和 rehype-katex）。
+
+### 4.1 行内公式
+
+使用单个 `$` 包裹：
+
+**语法：**
+```md
+爱因斯坦的质能方程：$E = mc^2$
+```
+
+**效果：**
+爱因斯坦的质能方程：$E = mc^2$
+
+---
+
+### 4.2 块级公式
+
+使用双 `$$` 包裹：
+
+**语法：**
+```md
+$$
+\frac{d}{dx}\left( \int_{a}^{x} f(u)\,du\right) = f(x)
+$$
+```
+
+**效果：**
+$$
+\frac{d}{dx}\left( \int_{a}^{x} f(u)\,du\right) = f(x)
+$$
+
+---
+
+### 4.3 复杂公式示例
+
+**矩阵：**
+$$
+\begin{pmatrix}
+a & b & c \\
+d & e & f \\
+g & h & i
+\end{pmatrix}
+$$
+
+**方程组：**
+$$
+\begin{cases}
+x + y = 5 \\
+2x - y = 1
+\end{cases}
+$$
+
+**积分：**
+$$
+\int_{0}^{\infty} e^{-x^2} dx = \frac{\sqrt{\pi}}{2}
+$$
+
+**求和：**
+$$
+\sum_{n=1}^{\infty} \frac{1}{n^2} = \frac{\pi^2}{6}
+$$
+
+---
+
+## 🎯 五、综合示例
+
+下面是一个综合使用多种语法的完整示例：
+
+:::note[📚 学习路径]
+跟随以下步骤学习 Rapide 主题：
+
+<Steps>
+  1. **了解基础语法**
+     
+     掌握 Markdown 基本语法和标注用法
+  
+  2. **学习代码块**
+     
+     了解如何在文档中展示代码
+     ```javascript
+     const theme = "rapide";
+     console.log(`当前主题: ${theme}`);
+     ```
+  
+  3. **使用组件**
+     
+     学习使用卡片、选项卡等组件丰富内容
+  
+  4. **实践应用**
+     
+     创建自己的文档项目
+</Steps>
+:::
+
+<CardGrid>
+  <Card title="代码示例" icon="seti:javascript">
+    展示各种编程语言的代码片段
+  </Card>
+  <Card title="标注提示" icon="information">
+    使用不同类型的标注突出重要信息
+  </Card>
+  <Card title="数学公式" icon="approve-check">
+    支持 LaTeX 公式：$\int_{0}^{1} x^2 dx$
+  </Card>
+  <Card title="交互组件" icon="star">
+    选项卡、步骤等丰富的交互组件
+  </Card>
+</CardGrid>
+
+---
+
+## 📖 六、最佳实践
+
+:::tip[💡 文档编写建议]
+1. **合理使用标注** - 不要过度使用，只在真正需要强调时使用
+2. **代码块加注释** - 为代码添加清晰的注释说明
+3. **组织内容结构** - 使用标题、列表、卡片等组织内容层次
+4. **保持一致性** - 在整个文档中保持风格统一
+5. **及时更新** - 定期更新文档内容，保持准确性
+:::
+
+:::caution[⚠️ 注意事项]
+- MDX 文件中的 import 语句必须在 frontmatter 之后
+- 代码块的语言标识要正确，否则无法高亮
+- 标注不能嵌套使用
+- 组件必须先导入才能使用
+:::
+
+---
+
+## 🎉 总结
+
+通过本指南，你应该已经掌握了 Rapide 主题的主要语法：
+
+- ✅ **5种标注类型**：note, tip, caution, danger
+- ✅ **代码块**：支持几乎所有编程语言，自动行号
+- ✅ **组件**：Badge, Card, Tabs, Steps, FileTree, LinkButton
+- ✅ **LaTeX 公式**：行内和块级数学公式
+- ✅ **最佳实践**：如何编写高质量文档
+
+现在开始使用 Rapide 创建你的精美文档吧！ 🚀
+

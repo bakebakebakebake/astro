@@ -3,31 +3,13 @@ import starlight from '@astrojs/starlight';
 import starlightThemeRapide from 'starlight-theme-rapide';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
-import mdx from '@astrojs/mdx';
-import astroExpressiveCode from 'astro-expressive-code';
 
+// https://starlight.astro.build/zh-cn/manual-setup/
 export default defineConfig({
-  // Markdown 配置
-  markdown: {
-    remarkPlugins: [remarkMath],
-    rehypePlugins: [rehypeKatex],
-  },
-  // 集成配置
   integrations: [
-    // 配置代码高亮
-    astroExpressiveCode({
-      themes: ['github-dark', 'github-light'],
-      styleOverrides: {
-        lineHeight: '1.1',
-        codePaddingBlock: '0.3rem',
-        codeFontSize: '0.9rem',
-      },
-      showLineNumbers: true,
-    }),
-    mdx(),
     starlight({
       title: 'My Docs',
-      // 更新social配置格式，使用href而不是link
+      // 社交链接配置
       social: [
         { label: '主页', icon: 'open-book', href: 'https://fxj.wiki' },
         { label: 'GitHub', icon: 'github', href: 'https://github.com/bakebakebakebake/astro' },
@@ -42,28 +24,70 @@ export default defineConfig({
         './src/styles/katex.css',
         './src/styles/custom.css',
       ],
-      // 使用主题插件
+      // Markdown 插件配置（用于代码块高级特性）
+      expressiveCode: {
+        themes: ['github-dark', 'github-light'],
+        styleOverrides: {
+          borderRadius: '12px',
+          codeFontSize: '0.9rem',
+          codePaddingBlock: '1rem',
+          codePaddingInline: '1rem',
+          frames: {
+            frameBoxShadowCssValue: '0 4px 12px rgba(0, 0, 0, 0.1)',
+            // Terminal 风格的标题栏
+            terminalTitlebarBackground: '#f6f8fa',
+            terminalTitlebarBorderBottomColor: 'transparent',
+            terminalTitlebarDotsOpacity: '1',
+            terminalTitlebarDotsForeground: '#d1d5da',
+          },
+        },
+        defaultProps: {
+          showLineNumbers: true,
+          wrap: false,
+          preserveIndent: true,
+          // 强制所有代码块使用 terminal frame
+          frame: 'terminal',
+        },
+        plugins: [],
+      },
+      // 使用 Rapide 主题插件
       plugins: [
         starlightThemeRapide({
           disableThemeSelect: false,
         }),
       ],
-      // 组件配置
+      // 自定义组件
       components: {
         Header: './src/components/CustomHeader.astro',
       },
+      // 在页面底部注入脚本
+      head: [
+        {
+          tag: 'script',
+          attrs: {
+            src: '/toc-script.js',
+            defer: true,
+          },
+        },
+      ],
       // 配置侧边栏
       sidebar: [
         {
           label: '指南',
           items: [
             { label: '开始使用', link: '/guides/getting-started/' },
-            { label: 'Dirichlet卷积', link: '/guides/dirichlet-convolution/' },
-            { label: 'Starlight功能测试', link: '/guides/starlight-test/' },
-            { label: 'Rapide主题测试', link: '/guides/rapide-test/' },
+            { label: 'Rapide 语法指南', link: '/guides/rapide-syntax-guide/' },
+            { label: '代码块示例', link: '/guides/code-examples/' },
+            { label: 'Rapide 主题测试', link: '/guides/rapide-test/' },
+            { label: 'Dirichlet 卷积', link: '/guides/dirichlet-convolution/' },
           ],
         },
       ],
     }),
   ],
+  // 全局 Markdown 配置（用于支持 LaTeX）
+  markdown: {
+    remarkPlugins: [remarkMath],
+    rehypePlugins: [rehypeKatex],
+  },
 });

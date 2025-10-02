@@ -30,78 +30,511 @@
   margin: 1.5rem 0;
 }
 
-/* 卡片样式 */
+/* 卡片样式优化 - Rapide 主题风格 */
 .card {
   border: 1px solid var(--sl-color-gray-5);
-  border-radius: 0.5rem;
+  border-radius: 12px;  /* 更圆润的圆角 */
   padding: 1.5rem;
-  background-color: #d8a7a8;
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  background: linear-gradient(135deg, var(--sl-color-bg-nav) 0%, var(--sl-color-bg) 100%);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--sl-color-accent), var(--sl-color-accent-high));
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transform: translateY(-4px);
+  border-color: var(--sl-color-accent);
+}
+
+.card:hover::before {
+  opacity: 1;
 }
 
 .card h3 {
   margin-top: 0;
   font-size: 1.25rem;
-  color: var(--sl-color-text-accent);
+  font-weight: 600;
+  color: var(--sl-color-white);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.card p {
+  margin: 0.75rem 0 0;
+  color: var(--sl-color-gray-2);
+  line-height: 1.6;
 }
 
 /* 深色模式适配 */
 :root[data-theme="dark"] .card {
-  background-color: var(--sl-color-gray-6);
+  background: linear-gradient(135deg, var(--sl-color-gray-6) 0%, var(--sl-color-gray-7) 100%);
   border-color: var(--sl-color-gray-5);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+:root[data-theme="dark"] .card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  border-color: var(--sl-color-accent);
 }
 
 
-/* 代码块紧凑样式 - 简化版本 */
+/* ============================================
+   代码块优化 - Rapide 主题风格
+   ============================================ */
+
+/* 代码块容器 */
 .expressive-code {
-  --ec-line-height: 1.2 !important;
-  --ec-code-padding-block: 0.5rem !important;
+  margin: 1.5rem 0;
+  border-radius: 12px !important;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+.expressive-code .frame {
+  border-radius: 12px !important;
+}
+
+/* ============================================
+   行号显示优化
+   ============================================ */
+
+/* 代码块容器 - 显示行号 */
 .expressive-code pre {
-  line-height: 1.2 !important;
-  margin: 0 !important;
+  padding-left: 0 !important;
 }
 
+/* 代码行 - 移除 flex，避免双层标记 */
 .expressive-code .ec-line {
-  min-height: 1.2em !important;
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
+  padding-left: 4.5rem !important;
+  position: relative !important;
 }
 
-/* 行号样式 */
-.expressive-code .ec-line-number {
-  height: 1.2em !important;
-  line-height: 1.2 !important;
+/* 隐藏原生行号（避免重复）*/
+.expressive-code .line-number {
+  display: none !important;
 }
 
-
-/* 代码块紧凑样式 - 强制覆盖 */
-:root {
-  --ec-line-height: 1.1 !important;
-}
-
+/* 使用 CSS counter 添加行号 */
 .expressive-code pre {
-  line-height: 1.1 !important;
+  counter-reset: line-number;
 }
 
-.expressive-code .ec-line {
-  min-height: 1.1em !important;
-  padding: 0 !important;
-  margin: 0 !important;
+/* 所有行都显示行号（包括 diff 行）*/
+.expressive-code .ec-line::before {
+  counter-increment: line-number;
+  content: counter(line-number);
+  position: absolute;
+  left: 0.8rem;
+  width: 2.5rem;
+  text-align: right;
+  color: var(--sl-color-gray-4);
+  opacity: 0.5;
+  user-select: none;
+  font-size: 0.85rem;
+  font-family: var(--sl-font-mono);
 }
 
-.expressive-code code {
-  font-size: 0.9rem !important;
+/* ============================================
+   Terminal Frame 风格 - 统一所有代码块
+   ============================================ */
+
+/* 所有代码块都使用 Terminal 风格标题栏 */
+.expressive-code .frame .header,
+.expressive-code .frame.has-title .header,
+.expressive-code .frame.is-terminal .header,
+.expressive-code figure > :first-child {
+  background: #f6f8fa !important;
+  border: none !important;
+  border-bottom: none !important;
+  padding: 0.35rem 1rem !important;
+  font-size: 0.75rem !important;
+  font-weight: 400 !important;
+  color: #57606a !important;
+  border-radius: 12px 12px 0 0 !important;
+  min-height: 2.2rem !important;
+  display: flex !important;
+  align-items: center !important;
 }
 
-/* 确保行号与代码对齐 */
-.expressive-code .ec-line-number {
-  height: 1.1em !important;
-  line-height: 1.1 !important;
+/* Terminal 圆点 - 只在有文件名时不显示，保持简洁 */
+.expressive-code .frame:not(.has-title) .header::before {
+  content: '● ● ●' !important;
+  color: #d1d5da !important;
+  font-size: 0.6rem !important;
+  margin-right: 0.75rem !important;
+  letter-spacing: 0.2rem !important;
+  opacity: 0.6 !important;
+}
+
+/* 有文件名时不显示圆点，保持简洁 */
+.expressive-code .frame.has-title .header::before {
+  content: '' !important;
+  margin-right: 0 !important;
+}
+
+/* 文件名文本 */
+.expressive-code .frame.has-title .title,
+.expressive-code figcaption {
+  font-family: var(--sl-font-mono) !important;
+  font-size: 0.75rem !important;
+  color: #57606a !important;
+  font-weight: 400 !important;
+  line-height: 1.2 !important;
+  background: transparent !important;
+}
+
+/* 深色模式 - Terminal 风格 */
+:root[data-theme="dark"] .expressive-code .frame .header,
+:root[data-theme="dark"] .expressive-code .frame.has-title .header,
+:root[data-theme="dark"] .expressive-code .frame.is-terminal .header {
+  background: #0d1117 !important;
+  color: #8b949e !important;
+}
+
+:root[data-theme="dark"] .expressive-code .frame .header::before {
+  color: #484f58 !important;
+}
+
+:root[data-theme="dark"] .expressive-code .frame.has-title .title,
+:root[data-theme="dark"] .expressive-code figcaption {
+  color: #8b949e !important;
+}
+
+/* ============================================
+   右上角功能按钮 - 毛玻璃效果
+   ============================================ */
+
+/* 按钮容器 */
+.expressive-code .copy,
+.expressive-code .ec-toolbar {
+  position: absolute !important;
+  top: 0.4rem !important;
+  right: 0.4rem !important;
+  display: flex !important;
+  gap: 0.3rem !important;
+  z-index: 100 !important;
+}
+
+/* 所有按钮基础样式 */
+.expressive-code .copy button,
+.expressive-code button[title*="Copy"],
+.expressive-code button[title*="复制"],
+.expressive-code button[title*="Wrap"],
+.expressive-code button[title*="换行"] {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 6px !important;
+  padding: 0.35rem 0.6rem !important;
+  font-size: 0.75rem !important;
+  color: var(--sl-color-text) !important;
+  cursor: pointer !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.3rem !important;
+  font-weight: 500 !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* hover 状态 */
+.expressive-code .copy button:hover,
+.expressive-code button[title*="Copy"]:hover,
+.expressive-code button[title*="Wrap"]:hover {
+  background: var(--sl-color-accent) !important;
+  border-color: var(--sl-color-accent) !important;
+  color: white !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* active 状态 */
+.expressive-code .copy button:active,
+.expressive-code button[title*="Copy"]:active {
+  transform: translateY(0) !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* 深色模式按钮优化 */
+:root[data-theme="dark"] .expressive-code .copy button,
+:root[data-theme="dark"] .expressive-code button[title*="Copy"],
+:root[data-theme="dark"] .expressive-code button[title*="Wrap"] {
+  background: rgba(0, 0, 0, 0.3) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  color: var(--sl-color-gray-2) !important;
+}
+
+/* ============================================
+   Diff 样式 - Git 风格，只显示一次标记
+   ============================================ */
+
+/* 移除所有默认的 diff 标记（包括 Expressive Code 自带的）*/
+.expressive-code .ec-line.ins,
+.expressive-code .ec-line.del,
+.expressive-code .ec-line.mark,
+.expressive-code [data-line].ins,
+.expressive-code [data-line].del,
+.expressive-code .ec-line.ins > *:first-child::before,
+.expressive-code .ec-line.del > *:first-child::before {
+  background-color: transparent !important;
+  border-left: none !important;
+}
+
+/* 隐藏所有 Expressive Code 自带的标记（包括竖线 | ）*/
+.expressive-code .ec-line.ins > span::before,
+.expressive-code .ec-line.del > span::before,
+.expressive-code .ec-line.mark > span::before,
+.expressive-code .ec-line.ins .code::before,
+.expressive-code .ec-line.del .code::before,
+.expressive-code .ec-line.mark .code::before,
+.expressive-code .ec-line.ins > *::after,
+.expressive-code .ec-line.del > *::after,
+.expressive-code .ec-line.mark > *::after,
+.expressive-code .ec-line.ins span::after,
+.expressive-code .ec-line.del span::after,
+.expressive-code .ec-line.mark span::after,
+.expressive-code .ec-line.ins > .code,
+.expressive-code .ec-line.del > .code,
+.expressive-code .ec-line.mark > .code {
+  content: none !important;
+  display: inline !important;
+  border: none !important;
+  background: none !important;
+}
+
+/* 隐藏行号右边的竖线分隔符 */
+.expressive-code .ec-line .code::before,
+.expressive-code .ec-line > span::before {
+  content: '' !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+/* 添加的行 - 绿色背景 + 左侧边框 + 左侧 + 号 */
+.expressive-code .ec-line.ins {
+  background-color: rgba(16, 185, 129, 0.12) !important;
+  border-left: 3px solid rgb(16, 185, 129) !important;
+}
+
+.expressive-code .ec-line.ins::after {
+  content: '+';
+  position: absolute;
+  left: 0.3rem;
+  top: 0;
+  color: rgb(16, 185, 129);
+  font-weight: bold;
+  font-size: 0.75rem;
+  line-height: inherit;
+}
+
+/* 删除的行 - 红色背景 + 左侧边框 + 左侧 - 号 + 删除线 */
+.expressive-code .ec-line.del {
+  background-color: rgba(239, 68, 68, 0.12) !important;
+  border-left: 3px solid rgb(239, 68, 68) !important;
+  text-decoration: line-through !important;
+  opacity: 0.75 !important;
+}
+
+.expressive-code .ec-line.del::after {
+  content: '-';
+  position: absolute;
+  left: 0.3rem;
+  top: 0;
+  color: rgb(239, 68, 68);
+  font-weight: bold;
+  font-size: 0.75rem;
+  line-height: inherit;
+}
+
+/* 高亮行 - 只用黄色背景 + 左侧边框 */
+.expressive-code .ec-line.mark {
+  background-color: rgba(251, 191, 36, 0.12) !important;
+  border-left: 3px solid rgb(251, 191, 36) !important;
+}
+
+/* 隐藏高亮行右侧可能出现的重复标记 */
+.expressive-code .ec-line.mark > *::after,
+.expressive-code .ec-line.mark span::after,
+.expressive-code .ec-line.mark .code::after {
+  content: none !important;
+  display: none !important;
+  border: none !important;
+}
+
+/* 深色模式优化 */
+:root[data-theme="dark"] .expressive-code {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+:root[data-theme="dark"] .expressive-code .frame.has-title .header {
+  background: linear-gradient(135deg, var(--sl-color-gray-7) 0%, var(--sl-color-gray-6) 100%) !important;
+  border-bottom-color: var(--sl-color-gray-5) !important;
+}
+
+:root[data-theme="dark"] .expressive-code .line-number {
+  color: var(--sl-color-gray-4) !important;
+}
+
+:root[data-theme="dark"] .expressive-code .copy button {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  color: var(--sl-color-gray-2) !important;
+}
+
+:root[data-theme="dark"] .expressive-code .ins {
+  background-color: rgba(16, 185, 129, 0.15) !important;
+}
+
+:root[data-theme="dark"] .expressive-code .del {
+  background-color: rgba(239, 68, 68, 0.15) !important;
+}
+
+
+/* ============================================
+   目录（TOC）折叠功能 - 支持6级标题
+   ============================================ */
+
+/* 目录容器 */
+.right-sidebar-panel {
+  position: relative;
+}
+
+/* 重置所有列表样式 */
+.right-sidebar nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* 所有目录项基础样式 - 减小间距 */
+.right-sidebar nav li {
+  position: relative;
+  margin: 0 0;  /* 去掉上下间距，让竖条连接 */
+  padding: 0;
+}
+
+/* 所有链接基础样式 */
+.right-sidebar nav a {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.5rem;  /* 减小垂直 padding */
+  border-radius: 4px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  color: var(--sl-color-gray-2);
+  font-size: 0.875rem;
+  line-height: 1.3;  /* 减小行高 */
+}
+
+.right-sidebar nav a:hover {
+  background-color: var(--sl-color-gray-6);
+  color: var(--sl-color-white);
+}
+
+/* 当前激活项 */
+.right-sidebar nav a[aria-current="true"] {
+  background-color: var(--sl-color-accent-low);
+  color: var(--sl-color-accent);
+  font-weight: 600;
+}
+
+/* 有子项的列表项 - 添加折叠图标 */
+.right-sidebar nav li.has-children > a::before {
+  content: '▸';
+  display: inline-block;
+  width: 0.8rem;
+  font-size: 0.7rem;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--sl-color-gray-3);
+  flex-shrink: 0;
+}
+
+/* 没有子项的列表项 - 占位保持对齐 */
+.right-sidebar nav li:not(.has-children) > a::before {
+  content: '';
+  width: 0.8rem;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* 展开状态的图标旋转 */
+.right-sidebar nav li.has-children.expanded > a::before {
+  transform: rotate(90deg);
+  color: var(--sl-color-accent);
+}
+
+/* 子级目录默认隐藏 */
+.right-sidebar nav li.has-children > ul {
+  padding-left: 1rem;
+  margin: 0;  /* 去掉所有 margin，让竖条连接 */
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), 
+              opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 展开状态 */
+.right-sidebar nav li.has-children.expanded > ul {
+  max-height: 2000px;
+  opacity: 1;
+  margin: 0;  /* 保持紧密连接 */
+}
+
+/* 各级标题缩进 */
+.right-sidebar nav ul ul {
+  padding-left: 1rem;
+}
+
+/* 各级标题字体大小渐变 */
+.right-sidebar nav > ul > li > a {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.right-sidebar nav ul ul > li > a {
+  font-size: 0.85rem;
+}
+
+.right-sidebar nav ul ul ul > li > a {
+  font-size: 0.8rem;
+  opacity: 0.9;
+}
+
+.right-sidebar nav ul ul ul ul > li > a {
+  font-size: 0.75rem;
+  opacity: 0.85;
+}
+
+/* 深色模式优化 */
+:root[data-theme="dark"] .right-sidebar nav a:hover {
+  background-color: var(--sl-color-gray-5);
+}
+
+:root[data-theme="dark"] .right-sidebar nav a[aria-current="true"] {
+  background-color: rgba(var(--sl-color-accent-rgb), 0.2);
+}
+
+/* 一级标题之间的间隔 - 去掉分隔线和边距 */
+.right-sidebar nav > ul > li {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
 }

@@ -1,0 +1,457 @@
+---
+title: 代码块示例展示
+description: 展示 Rapide 主题中代码块的各种高级特性和样式
+---
+
+# 代码块示例展示
+
+本页面展示 Rapide 主题中代码块的所有高级特性。
+
+## 基础代码块
+
+```javascript
+// 基础的 JavaScript 代码块
+const greeting = "Hello, Rapide!";
+console.log(greeting);
+```
+
+---
+
+## 带文件名的代码块
+
+```javascript title="app.js"
+// 代码块顶部会显示文件名
+const app = {
+  name: "Rapide Theme",
+  version: "0.4.0"
+};
+
+export default app;
+```
+
+```typescript title="types/user.ts"
+// TypeScript 文件示例
+export interface User {
+  id: number;
+  username: string;
+  email: string;
+  created_at: Date;
+}
+```
+
+---
+
+## 高亮特定行
+
+```python title="fibonacci.py" {5-7}
+def fibonacci(n):
+    if n <= 1:
+        return n
+    
+    # 这三行会被高亮显示
+    a, b = 0, 1
+    for _ in range(2, n + 1):
+        a, b = b, a + b
+    
+    return b
+
+# 计算第10个斐波那契数
+result = fibonacci(10)
+print(f"第10个斐波那契数是: {result}")
+```
+
+---
+
+## Diff 标记（Git 样式）
+
+### 简单的增删示例
+
+```javascript title="config.js" ins={3} del={2}
+const config = {
+  port: 3000,  // 删除这行
+  port: process.env.PORT || 3000,  // 添加这行
+  host: 'localhost'
+};
+```
+
+### 复杂的重构示例
+
+```typescript title="auth.ts" ins={8-15} del={2-5}
+// 旧的认证方式
+function authenticate(username: string, password: string) {
+  if (username === 'admin' && password === 'password') {
+    return true;
+  }
+  return false;
+}
+
+// 新的认证系统
+import { hashPassword, comparePassword } from './crypto';
+import { getUserByEmail } from './database';
+
+async function authenticate(email: string, password: string) {
+  const user = await getUserByEmail(email);
+  if (!user) return null;
+  
+  const isValid = await comparePassword(password, user.passwordHash);
+  return isValid ? user : null;
+}
+```
+
+---
+
+## 多种语言示例
+
+### Python
+
+```python title="data_analysis.py" {5-8}
+import pandas as pd
+import numpy as np
+
+# 读取数据
+df = pd.read_csv('data.csv')
+
+# 数据清洗和转换
+df = df.dropna()
+df['date'] = pd.to_datetime(df['date'])
+
+# 统计分析
+mean_value = df['value'].mean()
+print(f"平均值: {mean_value}")
+```
+
+### Rust
+
+```rust title="main.rs"
+use std::collections::HashMap;
+
+fn main() {
+    let mut scores = HashMap::new();
+    
+    scores.insert(String::from("Blue"), 10);
+    scores.insert(String::from("Yellow"), 50);
+    
+    for (key, value) in &scores {
+        println!("{}: {}", key, value);
+    }
+}
+```
+
+### Go
+
+```go title="server.go" ins={11-13}
+package main
+
+import (
+    "fmt"
+    "net/http"
+)
+
+func handler(w http.ResponseWriter, r *http.Request) {
+    fmt.Fprintf(w, "Hello, Rapide!")
+    
+    // 添加日志记录
+    fmt.Printf("Request from: %s\n", r.RemoteAddr)
+    fmt.Printf("Method: %s, Path: %s\n", r.Method, r.URL.Path)
+}
+
+func main() {
+    http.HandleFunc("/", handler)
+    http.ListenAndServe(":8080", nil)
+}
+```
+
+---
+
+## Terminal / Bash 命令
+
+```bash title="部署脚本"
+#!/bin/bash
+
+echo "开始部署..."
+
+# 构建项目
+npm run build
+
+# 运行测试
+npm test
+
+# 部署到服务器
+rsync -avz --delete dist/ user@server:/var/www/html/
+
+echo "部署完成！"
+```
+
+```bash title="Git 操作"
+# 创建新分支
+git checkout -b feature/new-component
+
+# 提交更改
+git add .
+git commit -m "feat: 添加新组件"
+
+# 推送到远程
+git push origin feature/new-component
+```
+
+---
+
+## SQL 查询
+
+```sql title="analytics.sql" {6-8}
+-- 查询活跃用户统计
+SELECT 
+    DATE(created_at) as date,
+    COUNT(*) as user_count,
+    COUNT(DISTINCT user_id) as unique_users
+FROM events
+WHERE event_type = 'login'
+  AND created_at >= DATE_SUB(NOW(), INTERVAL 30 DAY)
+GROUP BY DATE(created_at)
+ORDER BY date DESC;
+```
+
+---
+
+## HTML & CSS
+
+```html title="index.html" {6-8}
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapide 主题示例</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>欢迎使用 Rapide</h1>
+    </header>
+    <main>
+        <p>这是一个使用 Rapide 主题的网站</p>
+    </main>
+</body>
+</html>
+```
+
+```css title="styles.css" ins={12-15} del={8-10}
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    /* 旧的背景色 */
+    background-color: #f5f5f5;
+}
+
+/* 新的背景渐变 */
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+}
+
+header {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+```
+
+---
+
+## JSON 配置文件
+
+```json title="package.json" {8-11}
+{
+  "name": "rapide-theme-demo",
+  "version": "1.0.0",
+  "description": "Rapide 主题演示项目",
+  "main": "index.js",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "test": "jest",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@astrojs/starlight": "^0.34.3",
+    "starlight-theme-rapide": "^0.4.0"
+  }
+}
+```
+
+---
+
+## 多文件对比
+
+### 旧版本
+
+```javascript title="old-api.js"
+// 旧的 API 结构
+const fetchData = (url) => {
+  return fetch(url)
+    .then(response => response.json())
+    .then(data => data)
+    .catch(error => console.error(error));
+};
+
+module.exports = { fetchData };
+```
+
+### 新版本（重构后）
+
+```typescript title="new-api.ts" ins={1-2,4-14}
+// 新的 TypeScript API with 错误处理
+import { z } from 'zod';
+
+export async function fetchData<T>(
+  url: string,
+  schema: z.ZodSchema<T>
+): Promise<T | null> {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const data = await response.json();
+    return schema.parse(data);
+  } catch (error) {
+    console.error('API Error:', error);
+    return null;
+  }
+}
+```
+
+---
+
+## 综合示例：完整的 React 组件
+
+```tsx title="components/UserCard.tsx" {15-17,24-26} ins={24-26} del={15-17}
+import React from 'react';
+import { User } from '../types';
+
+interface UserCardProps {
+  user: User;
+  onEdit?: (user: User) => void;
+  onDelete?: (userId: string) => void;
+}
+
+export const UserCard: React.FC<UserCardProps> = ({
+  user,
+  onEdit,
+  onDelete
+}) => {
+  // 旧的样式类
+  const cardClass = "user-card rounded shadow";
+  
+  return (
+    <div className={cardClass}>
+      <img src={user.avatar} alt={user.name} />
+      <h3>{user.name}</h3>
+      <p>{user.email}</p>
+      
+      {/* 新的 Tailwind 样式 */}
+      <div className="flex gap-2 mt-4">
+        <button 
+          onClick={() => onEdit?.(user)}
+          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          编辑
+        </button>
+        <button 
+          onClick={() => onDelete?.(user.id)}
+          className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+        >
+          删除
+        </button>
+      </div>
+    </div>
+  );
+};
+```
+
+---
+
+## 特殊语言支持
+
+### YAML 配置
+
+```yaml title="docker-compose.yml"
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgresql://user:pass@db:5432/myapp
+    depends_on:
+      - db
+
+  db:
+    image: postgres:14
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=secretpassword
+
+volumes:
+  postgres_data:
+```
+
+### GraphQL
+
+```graphql title="schema.graphql"
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  posts: [Post!]!
+  createdAt: DateTime!
+}
+
+type Post {
+  id: ID!
+  title: String!
+  content: String!
+  author: User!
+  published: Boolean!
+  tags: [String!]!
+}
+
+type Query {
+  users: [User!]!
+  user(id: ID!): User
+  posts(published: Boolean): [Post!]!
+}
+
+type Mutation {
+  createUser(name: String!, email: String!): User!
+  createPost(title: String!, content: String!, authorId: ID!): Post!
+}
+```
+
+---
+
+## 总结
+
+Rapide 主题的代码块功能包括：
+
+- ✅ **自动行号** - 默认开启
+- ✅ **文件名显示** - 使用 `title="filename"`
+- ✅ **行高亮** - 使用 `{行号}`
+- ✅ **Diff 标记** - 使用 `ins={行号}` 和 `del={行号}`
+- ✅ **复制按钮** - 自动提供
+- ✅ **换行切换** - 自动提供
+- ✅ **下载功能** - 对命名文件自动提供
+- ✅ **50+ 编程语言** - 完整语法高亮支持
+- ✅ **圆角样式** - 现代化设计
+- ✅ **深色/浅色主题** - 自适应
+
+所有这些特性都已在项目中配置好，直接使用即可！🚀
+

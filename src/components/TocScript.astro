@@ -1,0 +1,65 @@
+---
+// TOC 折叠功能脚本组件
+---
+
+<script is:inline>
+  // 目录折叠功能
+  function initTocCollapse() {
+    const tocNav = document.querySelector('.right-sidebar-panel nav');
+    if (!tocNav) {
+      console.log('TOC nav not found');
+      return;
+    }
+
+    // 获取所有一级目录项（h2标题）
+    const topLevelItems = Array.from(tocNav.querySelectorAll('ul > li')).filter(li => {
+      const subList = li.querySelector('ul');
+      return subList && subList.children.length > 0;
+    });
+    
+    console.log('Found top level items:', topLevelItems.length);
+    
+    topLevelItems.forEach((item, index) => {
+      const link = item.querySelector(':scope > a');
+      const subList = item.querySelector(':scope > ul');
+      
+      if (!link || !subList) return;
+      
+      // 检查是否包含当前激活项
+      const hasActiveChild = subList.querySelector('a[aria-current="true"]');
+      
+      // 默认展开包含当前页面的section或第一个section
+      if (hasActiveChild || index === 0) {
+        item.classList.add('expanded');
+      } else {
+        item.classList.remove('expanded');
+      }
+      
+      // 添加点击事件
+      link.addEventListener('click', function(e) {
+        // 阻止跳转
+        e.preventDefault();
+        e.stopPropagation();
+        
+        // 切换展开状态
+        item.classList.toggle('expanded');
+        
+        console.log('Toggled item:', item.classList.contains('expanded'));
+      });
+      
+      // 添加视觉标记
+      link.style.cursor = 'pointer';
+    });
+  }
+
+  // 页面加载时初始化
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTocCollapse);
+  } else {
+    initTocCollapse();
+  }
+  
+  // 支持 View Transitions API
+  document.addEventListener('astro:page-load', initTocCollapse);
+</script>
+
