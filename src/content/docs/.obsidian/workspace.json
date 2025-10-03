@@ -13,12 +13,25 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "guides/rapide-test.mdx",
+                "file": "index.mdx",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "rapide-test"
+              "title": "index"
+            }
+          },
+          {
+            "id": "4644221766a12045",
+            "type": "leaf",
+            "state": {
+              "type": "mdx-preview",
+              "state": {
+                "data": "---\ntitle: Rapide主题功能测试\ndescription: 测试Starlight Rapide主题的各种功能和组件\n---\n\nimport { Badge } from '@astrojs/starlight/components';\nimport { Card, CardGrid } from '@astrojs/starlight/components';\nimport { Tabs, TabItem } from '@astrojs/starlight/components';\nimport { Steps } from '@astrojs/starlight/components';\nimport { FileTree } from '@astrojs/starlight/components';\nimport { LinkButton } from '@astrojs/starlight/components';\n\n<style is:global>\n{`\n  /* 透明卡片样式 */\n  .card, .card:hover {\n    background-color: transparent !important;\n    border: 1px solid var(--sl-color-gray-5) !important;\n    transition: all 0.2s ease !important;\n  }\n\n  .card:hover {\n    border-color: var(--sl-color-accent) !important;\n    transform: translateY(-2px) !important;\n  }\n\n  .card-clickable {\n    cursor: pointer !important;\n  }\n\n  /* 代码块样式 */\n  pre, \n  .astro-code,\n  .astro-code pre {\n    background-color: rgb(246, 247, 249) !important;\n  }\n`}\n</style>\n\n# Rapide主题功能测试\n\n本页面用于测试Starlight Rapide主题的各种功能和组件是否正常工作。\n\n<LinkButton href=\"https://starlight-theme-rapide.vercel.app/\" variant=\"primary\">\n  访问Rapide官方网站\n</LinkButton>\n\n## 基本段落测试\n\n这是一个基本的段落，测试文本渲染是否正常。\n\n**这是加粗文本**\n\n*这是斜体文本*\n\n> 这是引用文本\n\n## 列表测试\n\n无序列表:\n\n- 项目1\n- 项目2\n- 项目3\n\n有序列表:\n\n1. 第一步\n2. 第二步\n3. 第三步\n\n## 徽章测试 <Badge text=\"新功能\" />\n\n这里测试不同样式的徽章：\n\n<Badge text=\"默认徽章\" /> <Badge text=\"提示徽章\" variant=\"note\" /> <Badge text=\"危险徽章\" variant=\"danger\" /> <Badge text=\"成功徽章\" variant=\"success\" /> <Badge text=\"警告徽章\" variant=\"caution\" />\n\n## 旁白组件测试\n\n以下是不同类型的旁白组件测试：\n\n:::note\n这是一个普通的提示信息。\n\n可以包含多个段落和**富文本**标记。\n:::\n\n:::tip\n这是一个提示信息，提供有用的技巧。\n:::\n\n:::caution\n这是一个警告信息，提醒用户注意特定事项。\n:::\n\n:::danger\n这是一个危险提示，警告用户可能的严重后果。\n:::\n\n## 卡片组件测试\n\n### 单个卡片\n\n<Card title=\"单独的卡片示例\">\n  这是一个独立的卡片组件，用于展示特定的信息。\n</Card>\n\n### 卡片网格\n\n<CardGrid>\n  <Card title=\"快速上手\" icon=\"rocket\">\n    轻松开始使用Starlight构建文档网站。\n  </Card>\n  <Card title=\"完全可定制\" icon=\"setting\">\n    使用丰富的配置选项自定义网站外观。\n  </Card>\n  <Card title=\"Markdown增强\" icon=\"document\">\n    使用MDX和各种组件增强内容表现力。\n  </Card>\n  <Card title=\"SEO友好\" icon=\"seti:html\">\n    自动生成元数据，提高搜索引擎排名。\n  </Card>\n</CardGrid>\n\n### 可点击卡片\n\n\n\n<Card as=\"a\" href=\"/\" style={{ textDecoration: 'none', display: 'block' }} title=\"点击跳转到主页\" icon=\"home\" className=\"card-clickable\">\n  {/* <Card title=\"点击跳转到主页\" icon=\"home\" className=\"card-clickable\"> */}\n    点击这张卡片将跳转到网站主页。鼠标悬停时会有轻微的上浮效果，并且边框会变为主题强调色。\n</Card>\n\n## 选项卡组件测试\n\n<Tabs>\n  <TabItem label=\"概述\">\n    Starlight是Astro的官方文档主题，它提供了一系列内置功能来构建美观、高性能的文档网站。\n  </TabItem>\n  <TabItem label=\"特性\">\n    - 内置搜索功能\n    - 国际化支持\n    - 暗色模式/亮色模式切换\n    - 移动端响应式设计\n    - SEO优化\n    - 内容集合支持\n  </TabItem>\n  <TabItem label=\"配置\">\n    ```javascript\n    starlight({\n      title: '我的文档',\n      social: [\n        { label: 'GitHub', icon: 'github', href: 'https://github.com/withastro/starlight' },\n      ],\n    })\n    ```\n  </TabItem>\n</Tabs>\n\n## 带代码块的选项卡\n\n<Tabs>\n  <TabItem label=\"HTML\">\n    ```html\n    <!DOCTYPE html>\n    <html lang=\"zh\">\n    <head>\n      <meta charset=\"UTF-8\">\n      <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n      <title>HTML示例</title>\n      <link rel=\"stylesheet\" href=\"styles.css\">\n    </head>\n    <body>\n      <h1>Hello, World!</h1>\n      <p>这是一个HTML示例。</p>\n    </body>\n    </html>\n    ```\n  </TabItem>\n  <TabItem label=\"CSS\">\n    ```css\n    body {\n      font-family: 'Arial', sans-serif;\n      line-height: 1.6;\n      color: #333;\n      max-width: 800px;\n      margin: 0 auto;\n      padding: 20px;\n    }\n    \n    h1 {\n      color: #0077cc;\n      border-bottom: 2px solid #eee;\n      padding-bottom: 5px;\n    }\n    ```\n  </TabItem>\n  <TabItem label=\"JavaScript\">\n    ```javascript\n    // 等待DOM加载完成\n    document.addEventListener('DOMContentLoaded', () => {\n      // 获取元素\n      const heading = document.querySelector('h1');\n      \n      // 添加点击事件\n      heading.addEventListener('click', () => {\n        alert('你点击了标题!');\n      });\n      \n      console.log('JavaScript已加载!');\n    });\n    ```\n  </TabItem>\n</Tabs>\n\n## 步骤组件测试\n\n<Steps>\n  1. **安装依赖**\n     \n     使用你喜欢的包管理器安装依赖。\n     \n     ```bash\n     npm install @astrojs/starlight starlight-theme-rapide\n     ```\n  \n  2. **配置Astro**\n     \n     在`astro.config.mjs`文件中添加Starlight集成和Rapide主题。\n  \n  3. **创建内容**\n     \n     在`src/content/docs/`目录下创建Markdown或MDX文件。\n  \n  4. **启动开发服务器**\n     \n     ```bash\n     npm run dev\n     ```\n</Steps>\n\n## 文件树组件测试\n\n<FileTree>\n  - src/\n    - content/\n      - docs/\n        - guides/\n          - getting-started.md\n          - rapide-test.mdx\n        - index.md\n    - components/\n      - CustomHeader.astro\n      - ThemeSelect.astro\n    - styles/\n      - custom.css\n  - astro.config.mjs\n  - package.json\n</FileTree>\n\n## LaTeX公式测试\n\nStarlight支持通过插件显示数学公式：\n\n行内公式: $E=mc^2$\n\n行间公式:\n\n$$\\frac{d}{dx}\\left( \\int_{a}^{x} f(u)\\,du\\right)=f(x)$$\n\n微分方程:\n\n$$\\frac{dy}{dx} + P(x)y = Q(x)$$\n\n矩阵:\n\n$$\\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}$$\n\n## 代码块测试\n\n基本代码块:\n\n```javascript\n// 这是一个JavaScript代码示例\nfunction hello() {\n  console.log(\"Hello, Starlight!\");\n}\n```\n\n## 表格测试\n\n| 名称 | 描述 |\n|------|------|\n| Astro | Web框架 |\n| Starlight | 文档主题 |\n| Rapide | 主题样式 |\n\n## 链接测试\n\n[Starlight文档](https://starlight.astro.build/)\n\n## 图片测试\n\n![占位图](https://via.placeholder.com/150)\n\n## 自定义CSS测试\n\n<div className=\"custom-container\">\n  <p>这是一个使用自定义CSS样式的容器</p>\n  <button className=\"custom-button\">点击按钮</button>\n</div>\n\n<style>\n{`\n  /* 网格布局 */\n  .grid-cols-2 {\n    display: grid;\n    grid-template-columns: repeat(2, 1fr);\n    gap: 1rem;\n  }\n\n  @media (max-width: 768px) {\n    .grid-cols-2 {\n      grid-template-columns: 1fr;\n    }\n  }\n\n  /* 自定义容器 */\n  .custom-container {\n    background-color: #f4f4f4;\n    border-radius: 8px;\n    padding: 1rem;\n    margin: 1rem 0;\n    border-left: 4px solid var(--sl-color-accent);\n  }\n\n  .custom-button {\n    background-color: var(--sl-color-accent);\n    color: white;\n    border: none;\n    padding: 0.5rem 1rem;\n    border-radius: 4px;\n    cursor: pointer;\n  }\n\n  .custom-button:hover {\n    background-color: var(--sl-color-accent-high);\n  }\n`}\n</style> ",
+                "basename": "rapide-test"
+              },
+              "icon": "lucide-file",
+              "title": "MDX Preview"
             }
           },
           {
@@ -166,13 +179,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "guides/rapide-test.mdx",
+                "file": "index.mdx",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "rapide-test 的大纲"
+              "title": "index 的大纲"
             }
           }
         ],
@@ -196,9 +209,9 @@
   },
   "active": "6132a6ea3a692ce9",
   "lastOpenFiles": [
+    "guides/rapide-test.mdx",
     "guides/dirichlet-convolution.md",
     "guides/rapide-test.md",
-    "guides/rapide-test.mdx",
     "guides/getting-started.md",
     "guides/代码随想录知识星球-八股文速记版.md",
     "guides/Dirichlet-convolution.md",
