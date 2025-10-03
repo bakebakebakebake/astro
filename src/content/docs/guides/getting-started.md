@@ -7,7 +7,6 @@ description: 学习如何开始使用这个Starlight网站
 
 欢迎来到这个Starlight文档网站！本指南将帮助您快速开始。
 
-## 前提条件
 
 - [Node.js](https://nodejs.org/) (v18.14.1 或更高版本)
 - 文本编辑器（推荐 [VS Code](https://code.visualstudio.com/)）
