@@ -120,7 +120,7 @@
 
 /* 代码行 - 移除 flex，避免双层标记 */
 .expressive-code .ec-line {
-  padding-left: 4.5rem !important;
+  padding-left: 3rem !important;
   position: relative !important;
 }
 
@@ -139,7 +139,7 @@
   counter-increment: line-number;
   content: counter(line-number);
   position: absolute;
-  left: 0.8rem;
+  left: 0rem;
   width: 2.5rem;
   text-align: right;
   color: var(--sl-color-gray-4);
@@ -147,6 +147,42 @@
   user-select: none;
   font-size: 0.85rem;
   font-family: var(--sl-font-mono);
+}
+
+/* ============================================
+   代码块语言标签显示
+   ============================================ */
+
+/* 语言标签样式 */
+.code-language-label {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--sl-color-gray-3) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+  font-family: var(--sl-font-mono) !important;
+  background: rgba(0, 0, 0, 0.1);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  pointer-events: none;
+  user-select: none;
+  line-height: 1;
+}
+
+:root[data-theme="dark"] .code-language-label {
+  color: var(--sl-color-gray-3) !important;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* 为标题栏预留空间（避免语言标签与按钮重叠）*/
+.expressive-code .frame .header {
+  position: relative;
+  padding-right: 5rem !important;
 }
 
 /* ============================================
@@ -413,6 +449,84 @@
 /* 目录容器 */
 .right-sidebar-panel {
   position: relative;
+}
+
+/* 自定义目录组件样式 */
+.custom-toc-container {
+  position: relative;
+}
+
+.toc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--sl-color-gray-4);
+}
+
+.toc-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--sl-color-gray-1);
+  margin: 0;
+}
+
+.toc-controls {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.toc-control-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--sl-color-gray-4);
+  border-radius: 6px;
+  background: var(--sl-color-gray-7);
+  color: var(--sl-color-gray-2);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 0;
+}
+
+.toc-control-btn:hover {
+  background: var(--sl-color-gray-6);
+  border-color: var(--sl-color-gray-3);
+  color: var(--sl-color-gray-1);
+  transform: translateY(-1px);
+}
+
+.toc-control-btn:active {
+  transform: translateY(0);
+}
+
+.toc-control-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* 深色模式 - 目录控制按钮 */
+:root[data-theme="dark"] .toc-header {
+  border-bottom-color: var(--sl-color-gray-5);
+}
+
+:root[data-theme="dark"] .toc-title {
+  color: var(--sl-color-gray-2);
+}
+
+:root[data-theme="dark"] .toc-control-btn {
+  background: var(--sl-color-gray-6);
+  border-color: var(--sl-color-gray-5);
+  color: var(--sl-color-gray-3);
+}
+
+:root[data-theme="dark"] .toc-control-btn:hover {
+  background: var(--sl-color-gray-5);
+  border-color: var(--sl-color-gray-4);
+  color: var(--sl-color-gray-1);
 }
 
 /* 重置所有列表样式 */

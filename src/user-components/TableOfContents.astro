@@ -1,0 +1,257 @@
+---
+// 自定义目录组件 - 支持全部折叠/展开和自动展开当前标题
+// 使用 Starlight 的原始 TableOfContents 组件并添加控制按钮
+---
+
+<div class="custom-toc-container">
+  <!-- 目录标题和控制按钮 -->
+  <div class="toc-header">
+    <h2 class="toc-title">On this page</h2>
+    <div class="toc-controls">
+      <button 
+        class="toc-control-btn expand-all" 
+        title="全部展开"
+        aria-label="全部展开目录"
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+        </svg>
+      </button>
+      <button 
+        class="toc-control-btn collapse-all" 
+        title="全部折叠"
+        aria-label="全部折叠目录"
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+          <path d="M12 2v20"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+  
+  <!-- 使用 Starlight 的原始目录功能 -->
+  <div class="right-sidebar-panel">
+    <nav>
+      <ul>
+        <slot />
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<style>
+  .custom-toc-container {
+    position: relative;
+  }
+
+  .toc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--sl-color-gray-4);
+  }
+
+  .toc-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--sl-color-gray-1);
+    margin: 0;
+  }
+
+  .toc-controls {
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  .toc-control-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--sl-color-gray-4);
+    border-radius: 6px;
+    background: var(--sl-color-gray-7);
+    color: var(--sl-color-gray-2);
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 0;
+  }
+
+  .toc-control-btn:hover {
+    background: var(--sl-color-gray-6);
+    border-color: var(--sl-color-gray-3);
+    color: var(--sl-color-gray-1);
+    transform: translateY(-1px);
+  }
+
+  .toc-control-btn:active {
+    transform: translateY(0);
+  }
+
+  .toc-control-btn svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* 深色模式 */
+  :root[data-theme="dark"] .toc-header {
+    border-bottom-color: var(--sl-color-gray-5);
+  }
+
+  :root[data-theme="dark"] .toc-title {
+    color: var(--sl-color-gray-2);
+  }
+
+  :root[data-theme="dark"] .toc-control-btn {
+    background: var(--sl-color-gray-6);
+    border-color: var(--sl-color-gray-5);
+    color: var(--sl-color-gray-3);
+  }
+
+  :root[data-theme="dark"] .toc-control-btn:hover {
+    background: var(--sl-color-gray-5);
+    border-color: var(--sl-color-gray-4);
+    color: var(--sl-color-gray-1);
+  }
+</style>
+
+<script>
+  // 目录控制功能
+  function initTocControls() {
+    const tocNav = document.querySelector('.right-sidebar-panel nav');
+    if (!tocNav) {
+      console.log('TOC nav not found');
+      return;
+    }
+
+    const expandBtn = document.querySelector('.toc-control-btn.expand-all');
+    const collapseBtn = document.querySelector('.toc-control-btn.collapse-all');
+
+    if (!expandBtn || !collapseBtn) {
+      console.log('Control buttons not found');
+      return;
+    }
+
+    // 全部展开功能
+    expandBtn.addEventListener('click', () => {
+      const allItems = tocNav.querySelectorAll('li.has-children');
+      allItems.forEach(item => {
+        item.classList.add('expanded');
+      });
+      console.log('全部展开');
+    });
+
+    // 全部折叠功能
+    collapseBtn.addEventListener('click', () => {
+      const allItems = tocNav.querySelectorAll('li.has-children');
+      allItems.forEach(item => {
+        item.classList.remove('expanded');
+      });
+      console.log('全部折叠');
+    });
+
+    // 递归处理所有列表项，默认全部折叠
+    function processListItems(container: Element) {
+      const items = container.querySelectorAll(':scope > li');
+      
+      items.forEach((item: Element, index: number) => {
+        const link = item.querySelector(':scope > a') as HTMLAnchorElement;
+        const subList = item.querySelector(':scope > ul');
+        
+        if (!link) return;
+        
+        // 如果有子列表，标记为可折叠
+        if (subList && subList.children.length > 0) {
+          item.classList.add('has-children');
+          
+          // 检查是否包含当前激活项
+          const hasActiveChild = subList.querySelector('a[aria-current="true"]');
+          const isTopLevel = container === tocNav?.querySelector('ul');
+          
+          // 默认折叠，除非包含当前页面
+          if (hasActiveChild) {
+            item.classList.add('expanded');
+          } else {
+            item.classList.remove('expanded');
+          }
+          
+          // 添加点击事件（只在链接部分，不影响子项）
+          link.addEventListener('click', function(e: Event) {
+            // 阻止默认跳转
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // 切换展开状态
+            item.classList.toggle('expanded');
+          });
+          
+          // 递归处理子列表
+          processListItems(subList);
+        } else {
+          // 没有子项，移除可能存在的类
+          item.classList.remove('has-children');
+        }
+      });
+    }
+    
+    // 从根列表开始处理
+    const rootList = tocNav.querySelector('ul');
+    if (rootList) {
+      processListItems(rootList);
+    }
+
+    // 自动展开当前浏览的标题
+    function autoExpandCurrentHeading() {
+      const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+      
+      // 创建 Intersection Observer 来监听标题
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const headingId = entry.target.id;
+            const tocLink = tocNav?.querySelector(`a[href="#${headingId}"]`);
+            
+            if (tocLink) {
+              // 找到包含此链接的父级列表项
+              let parentLi = tocLink.closest('li');
+              while (parentLi) {
+                const parentSubList = parentLi.querySelector('ul');
+                if (parentSubList) {
+                  parentLi.classList.add('expanded');
+                }
+                const parentParentLi = parentLi.parentElement?.closest('li');
+                parentLi = parentParentLi || null;
+              }
+            }
+          }
+        });
+      }, {
+        rootMargin: '-20% 0px -70% 0px'
+      });
+
+      // 观察所有标题
+      headings.forEach(heading => {
+        if (heading.id) {
+          observer.observe(heading);
+        }
+      });
+    }
+
+    // 初始化自动展开功能
+    autoExpandCurrentHeading();
+  }
+
+  // 页面加载时初始化
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTocControls);
+  } else {
+    initTocControls();
+  }
+  
+  // 支持 View Transitions API
+  document.addEventListener('astro:page-load', initTocControls);
+</script>

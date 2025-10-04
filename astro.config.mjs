@@ -49,6 +49,8 @@ export default defineConfig({
           frame: 'terminal',
         },
         plugins: [],
+        // 启用语言标签显示
+        useDarkModeMediaQuery: true,
       },
       // 使用 Rapide 主题插件
       plugins: [
@@ -66,6 +68,13 @@ export default defineConfig({
           tag: 'script',
           attrs: {
             src: '/toc-script.js',
+            defer: true,
+          },
+        },
+        {
+          tag: 'script',
+          attrs: {
+            src: '/code-language.js',
             defer: true,
           },
         },
